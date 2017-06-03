@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack --config config/webpack.dev.js",
+    "build": "webpack --config config/webpack.pro.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,7 +25,10 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-loader": "^2.4.2",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.5",
+    "style-loader": "^0.18.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.6.1"
   }
