@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import Routes from './routers/index';
-import 'verdor/common.js'
-let store = createStore(reducer);
+import './verdor/common.js'
 
 require('scss/reset.scss');
 require('scss/base.scss');
