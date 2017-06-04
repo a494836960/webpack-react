@@ -1,15 +1,37 @@
+@import './lib.scss';
+
 *{
 	padding: 0;
 	margin: 0;
 }
-ul,ol,li,dd,dl,dt{
+input{
+	outline: none;
+}
+body{
+	font-size: 12px/1.5 STHeiti,微软雅黑,sans-serif;
+	background: $mainBg;
+}
+
+ul,ol{
 	list-style: none;
-} 
-table{
-    border-collapse: collapse;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+table {
+	border-collapse: collapse;
 	border-spacing: 0;
 }
-strong,em,i{
+i{
 	font-style: normal;
-	font-weight: normal;
+}
+a{
+	color: #333;
+	&:link,&:visited,&:hover,&:active{
+		color:#333;
+		text-decoration: none;
+	};
 }

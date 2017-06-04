@@ -7,7 +7,7 @@ let webpack = require('webpack');
 
 module.exports = {
 	entry:{
-		app: path.join(__dirname,'../src/app')
+		app: [path.join(__dirname,'../src/app')]
 	},
 	output:{
 		path: path.join(__dirname,'../app'),
@@ -34,7 +34,9 @@ module.exports = {
 			'img': path.join(__dirname,'../src/assets/imgs'),
 			'components': path.join(__dirname,'../src/components'),
 			'page': path.join(__dirname,'../src/pages'),
-			'scss': path.join(__dirname,'../src/assets/scss')
+			'scss': path.join(__dirname,'../src/assets/scss'),
+			'action': path.join(__dirname,'../src/action'),
+			'reducer': path.join(__dirname,'../src/reducer')
 		},
 		 extensions: ['.js', '.jsx']
 	},

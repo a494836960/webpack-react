@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config config/webpack.dev.js",
+    "dev": "node config/server.dev.js",
     "build": "webpack --config config/webpack.pro.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,11 +25,14 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-loader": "^2.4.2",
+    "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "redux": "^3.6.0",
     "sass-loader": "^6.0.5",
     "style-loader": "^0.18.1",
     "url-loader": "^0.5.8",
-    "webpack": "^2.6.1"
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   }
 }
