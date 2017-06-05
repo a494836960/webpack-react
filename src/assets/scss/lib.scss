@@ -2,3 +2,10 @@ $mainBg: #f1f1f1;
 
 $color-primary: #f00;
 $color-info: #d00;
+
+@mixin flex($orientation : horizontal,$align: center ,$pack:center){
+	display: -webkit-box;
+	-webkit-box-align:$align;
+	-webkit-box-orient:$orientation;
+	-webkit-box-pack:$pack;
+}

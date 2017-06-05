@@ -1,6 +1,34 @@
 @import './lib.scss';
 
 body{
-	background: $color-primary;
-	transform: rotate(30deg);
+	font-size: 0.28rem;
+  font-family: "Segoe UI","Lucida Grande",Helvetica,Arial,"Microsoft YaHei",FreeSans,Arimo,"Droid Sans","wenquanyi micro hei","Hiragino Sans GB","Hiragino Sans GB W3",FontAwesome,sans-serif;
+}
+
+.icon{
+	background-size: contain;
+	background-position:center;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 200ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+  z-index: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0;
+  transition: opacity 400ms ease-in;
 }

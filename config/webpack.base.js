@@ -32,11 +32,11 @@ module.exports = {
 	resolve:{
 		alias:{
 			'img': path.join(__dirname,'../src/assets/imgs'),
-			'components': path.join(__dirname,'../src/components'),
+			'component': path.join(__dirname,'../src/components'),
 			'page': path.join(__dirname,'../src/pages'),
 			'scss': path.join(__dirname,'../src/assets/scss'),
-			'action': path.join(__dirname,'../src/action'),
-			'reducer': path.join(__dirname,'../src/reducer')
+			'action': path.join(__dirname,'../src/redux/action'),
+			'reducer': path.join(__dirname,'../src/redux/reducer')
 		},
 		 extensions: ['.js', '.jsx']
 	},
