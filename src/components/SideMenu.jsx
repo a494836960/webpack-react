@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import * as actions from 'action/Index'
 
-export default class SideMenu extends Component {
+class SideMenu extends Component {
 
 	constructor(props){
 		super(props);
@@ -16,11 +18,25 @@ export default class SideMenu extends Component {
 		})
 	}
 
-	render(){
+	toggle(){
+		this.setState({
+			isShow: !this.state.isShow
+		})
+	}
+
+	hide(){
+		this.props.dispatch(actions.toggleMenu(false));
+	}
+
+	render(){  
 		return (
-			<div>
-				侧边蓝
+			<div  className = {`side-menu ${this.state.isShow?'active': 'exit'}`}>
+				<div className='content'>
+						侧边蓝
+				</div>	
+				<div className="cover" onClick = {this.hide.bind(this)}></div>
 			</div>
+			
 		)
 	}
 }
@@ -28,3 +44,5 @@ export default class SideMenu extends Component {
 SideMenu.defaultProps = {
 	isShow: false
 }
+
+export default connect()(SideMenu);

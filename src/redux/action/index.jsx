@@ -5,6 +5,6 @@ export function setHead (head) {
 	return {type: SET_HEAD, head}
 } 
 
-export function toggleMenu(){
-	return {type: TOGGLE_MENU}
+export function toggleMenu(isShow){
+	return {type: TOGGLE_MENU,isShow}
 }

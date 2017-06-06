@@ -10,6 +10,7 @@ export default class Head extends Component {
 	}	
 
 	componentWillReceiveProps(nextProps){
+		console.log(nextProps);
 		this.setState({
 			title: nextProps.head.title
 		})

@@ -8,10 +8,11 @@ import SideMenu from 'component/SideMenu'
 export default class Index extends Component{
 
 	componentWillMount(){
-		this.props.dispatch(actions.setHead({title:'官网'}))
+        this.props.dispatch(actions.toggleMenu(false));
 	}
 
 	render(){
+        console.log(this.props,'render')
 		return(
 		<div>
 			<Head head={this.props.head}></Head>
@@ -28,7 +29,7 @@ export default class Index extends Component{
                      }
                  < / div >
              < / ReactCSSTransitionGroup >
-             <SideMenu>
+             <SideMenu isShow={this.props.sideMenu.isShow}>
              	
              </SideMenu>
 		</div>
@@ -37,7 +38,17 @@ export default class Index extends Component{
 }
 
 function selector (state,filter){
-	return state;
+    console.log(state.setHead.title,'state');
+    
+
+	return {
+        head:{
+            title: state.setHead.title
+        },
+        sideMenu:{
+            isShow: state.toggleMenu.isShow
+        }
+    };
 }
 
 module.exports = connect(selector)(Index);
