@@ -4,6 +4,7 @@ import Index from 'page/Index';
 import Home from 'page/home/Index'
 import Brand from 'page/brand/Index'
 import Activity from 'page/activity/List'
+import Course from 'page/course/Index'
 
 export default class Routes extends Component{
 	render(){
@@ -13,6 +14,7 @@ export default class Routes extends Component{
 					<IndexRoute component={Home}></IndexRoute>
 					<Route path='/brand' component={Brand}></Route>
 					<Route path='/activity' component={Activity}></Route>
+					<Route path='/course' component={Course}></Route>
 				</Route>
 			</Router>
 		)

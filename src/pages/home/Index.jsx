@@ -13,7 +13,7 @@ import * as actions from 'action/Index'
 	}
 	render(){
 		return(
-			<div>首fffff页
+			<div>
 				<div onClick={this.showMenu.bind(this)}>点加我</div>
 			</div>
 		)

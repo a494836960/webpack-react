@@ -2,6 +2,8 @@ $mainBg: #f1f1f1;
 
 $color-primary: #f00;
 $color-info: #d00;
+$color-disabled: #999;
+$head-height: 0.78rem;
 
 @mixin flex($orientation : horizontal,$align: center ,$pack:center){
 	display: -webkit-box;

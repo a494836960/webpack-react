@@ -12,6 +12,11 @@ body{
 	display: inline-block;
 }
 
+.main{
+   position : absolute; 
+    width : 100%;
+    top: $head-height; 
+}
 
 .fade-enter {
   opacity: 0;
@@ -31,4 +36,22 @@ body{
 .fade-leave.fade-leave-active {
   opacity: 0;
   transition: opacity 400ms ease-in;
+}
+
+@for $i from 1 through 10{
+  .mt#{$i}{
+    margin-top:0.1rem * $i;
+  }
+}
+
+/*品牌活动*/
+.activity-item{
+  margin-top: .2rem;
+  background: #fff;
+  padding: 0.2rem;
+  img{
+    width: 100%;
+    border-radius: 5px;
+    border:1px solid #ccc;
+  }
 }

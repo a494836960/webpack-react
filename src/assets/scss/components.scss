@@ -2,7 +2,7 @@
 
 .head{
 	@include flex;
-	height: 0.95rem;
+	height: $head-height;
 	font-size: .32rem;
 	background-color: #fff;
 	position: fixed;
@@ -36,6 +36,7 @@
 	.banner-item{
 		a{
 			display: block;
+			font-size: 0;
 
 		}
 		img{
@@ -105,4 +106,57 @@
 		height: 100%;
 		top: 0;
 		left: 0;
+}
+.time-line{
+	padding: .3rem 0 .3rem .3rem;
+	background: #fff;
+	position: relative;
+	&:before{
+		content: '';
+		position: absolute;
+		top: 0;
+		left: .3rem;
+		width: 1px;
+		height: 100%;
+		background: #CCCDD1;
+	}
+
+	.time-line-item{
+		position: relative;
+		padding: .2rem .3rem 0;
+		&.active{
+			.time-line-item-head{
+				border-color: $color-primary;
+			}
+		}
+		.time-line-item-head{
+			position:absolute;
+			top: 50%;
+			width: 5px;
+			height: 5px;
+			border-radius: 50%;
+			background: #fff;
+			border: 2px solid $color-disabled;
+			margin:-2.5px 0 0 -2.5px;
+			left: 0;
+		}
+		 
+		.time-line-item-content{
+			background: #fafafa;
+			border-radius: 5px;
+			padding: .2rem 0.3rem;
+		    box-shadow: 0 3px 3px #ccc;
+		}
+
+		.time-line-item-title{
+			color: $color-primary;
+			font-size: .3rem;
+		}
+
+		.time-line-item-desc{
+			font-size: .28rem;
+			color: #555;
+		}
+		
+	}
 }

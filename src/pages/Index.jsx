@@ -23,7 +23,7 @@ export default class Index extends Component{
                  transitionEnterTimeout = { 300 }
                  transitionLeaveTimeout = { 300 } >
                  < div key = { this . props . location . pathname }
-                     style = { { position : "absolute" , width : "100%",top: ".95rem" } } >
+                   className='main' >
                      {
                          this.props.children
                      }
