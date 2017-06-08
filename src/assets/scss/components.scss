@@ -160,3 +160,35 @@
 		
 	}
 }
+
+/*新闻Item*/
+.news-item{
+	@include flex;
+	border-bottom: 1px dashed #D6D7DC;
+	padding: .2rem 0;
+	.news-item-img{
+		width: 2rem;
+		height: 1.2rem;
+		@include flex;
+		border-radius: 5px;
+	}
+	.news-item-content{
+		-webkit-box-flex:1;
+		@include flex(vertical,start);
+		margin-left: 0.3rem;
+	}
+	.news-item-title{
+		color: #323232;
+		font-size: 0.28rem;
+	}
+	.news-item-summary{
+		color: #7D7D7D;
+		font-size: .24rem;
+	}
+	.news-item-date{
+		color: #848484;
+		font-size: .24rem;
+	    width: 100%;
+    	text-align: right;
+	}
+}

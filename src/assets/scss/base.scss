@@ -55,3 +55,70 @@ body{
     border:1px solid #ccc;
   }
 }
+
+/*新闻List*/
+.news-list{
+  padding: 0 .3rem .3rem;
+  background: #fff;
+}
+.article{
+  padding: 0 0.3rem;
+  background: #fff;
+  border-top: 1px solid #D6D7DC;
+}
+.article-head{
+  border-bottom: 1px dashed #D6D7DC;
+}
+/*文章详情*/
+.article-title{
+  text-align: center;
+  font-size: .32rem;
+  color: #323232;
+  line-height: .8rem;
+  font-weight: normal;
+}
+.article-intro{
+  color: #909090;
+  font-size: .24rem;
+  text-align: center;
+}
+.article-intro-date{
+  margin-right: .2rem;
+}
+
+
+.article-body{
+  font-size: 0.3rem;
+  padding: 0.2rem 0;
+
+  img{
+    width: 100%;
+  height: initial;
+  }
+}
+
+.panel-list{
+  padding: 0.3rem;
+  background: #fff;
+}
+.panel{
+  background: #FAFAFA;
+  border-radius: 5px;
+  padding: .3rem .3rem .4rem;
+  margin-bottom: .2rem;
+  box-shadow:0 4px 5px #eee;
+  .date{
+    font-size: .3rem;
+    color: #828282;
+  }
+  .title{
+    font-size: .28rem;
+    color: #323232;
+    margin-top: .1rem;
+  }
+  .content{
+     margin-top: .1rem;
+    font-size: .24rem;
+    color: #555555;
+  }
+}
