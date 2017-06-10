@@ -11,7 +11,8 @@ module.exports = {
 	},
 	output:{
 		path: path.join(__dirname,'../app'),
-		filename:'[name].js'
+		filename:'[name].js',
+		chunkFilename:'[name].[chunkHash:5].js'
 	},
 	module:{
 		loaders:[
@@ -44,6 +45,7 @@ module.exports = {
 		new htmlPulgin({
 			template: path.join(__dirname,'../template/index.html')
 		}),
-		new extract('[name].css')
+		new extract('[name].css'),
+		new webpack.optimize.CommonsChunkPlugin('common.js')
 	]
 }

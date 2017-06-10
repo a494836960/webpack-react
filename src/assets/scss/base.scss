@@ -122,3 +122,55 @@ body{
     color: #555555;
   }
 }
+
+.brand-item{
+  width:50%;
+  float: left;
+  text-align: center;
+  padding: .25rem 0; 
+  border-bottom: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+  box-sizing: border-box;
+  background: #fff;
+
+  &:nth-of-type(2n){
+    border-right:0px;
+  }
+  .brand-item-pic{
+    width: 60%;
+  }
+  .brand-item-name{
+    font-size: .32rem;
+    margin-top: .1rem;
+  }
+}
+
+/*左侧菜单*/
+.menu{
+  .menu-head{
+    background: $color-primary;
+    text-align: center;
+    padding: .6rem 0;
+    img{
+      width: 2rem;
+    }
+  }
+  .menu-item{
+    padding: 0 .5rem;
+    line-height: 1rem;
+    padding-left: 0.7rem;
+    font-size: .3rem;
+    color: #323232;
+    &.active{
+      background: #FAFAFA;
+    }
+    .menu-body{
+      display: block;
+      border-bottom: 1px solid #D6D7DC;
+      background-size: .5rem;
+      background-repeat: no-repeat;
+      padding-left: 1rem;
+      background-position: left center;
+    }
+  }
+}

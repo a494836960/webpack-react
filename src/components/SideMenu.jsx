@@ -32,7 +32,7 @@ class SideMenu extends Component {
 		return (
 			<div  className = {`side-menu ${this.state.isShow?'active': 'exit'}`}>
 				<div className='content'>
-						侧边蓝
+						{this.props.children}
 				</div>	
 				<div className="cover" onClick = {this.hide.bind(this)}></div>
 			</div>
