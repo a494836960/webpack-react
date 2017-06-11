@@ -4,6 +4,7 @@ $color-primary: #FF6700;
 $color-info: #d00;
 $color-disabled: #999;
 $head-height: 0.78rem;
+$color-disabled: #eee;
 
 @mixin flex($orientation : horizontal,$align: center ,$pack:center){
 	display: -webkit-box;

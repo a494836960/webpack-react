@@ -6,7 +6,7 @@ import ReactCSSTransitionGroup from "react-addons-css-transition-group" ;
 import SideMenu from 'component/SideMenu'
 import {Link} from 'react-router'
 
-export default class Index extends Component{
+class Index extends Component{
 
     constructor(props){
         super(props);
@@ -17,7 +17,6 @@ export default class Index extends Component{
 
 	componentWillMount(){
         this.props.dispatch(actions.toggleMenu(false));
-
         this.state.navList = [
             {
                 id:'1',
@@ -83,7 +82,7 @@ export default class Index extends Component{
 
 		return(
 		<div>
-			<Head head={this.props.head}></Head>
+			<Head head={this.props.head} isLogin={this.props.user.isLogin}></Head>
 			 < ReactCSSTransitionGroup
                  transitionName = "fade"
                  component = "div"
@@ -113,15 +112,20 @@ export default class Index extends Component{
 }
 
 function selector (state,filter){
-
+    console.log(state)
 	return {
         head:{
-            title: state.setHead.title
+            title: state.setHead.title,
+            isHome: state.setHead.isHome,
+            hasRight: state.setHead.hasRight
         },
         sideMenu:{
             isShow: state.toggleMenu.isShow
+        },
+        user:{
+            isLogin: state.user.isLogin
         }
     };
 }
 
-module.exports = connect(selector)(Index);
+export default connect(selector)(Index);

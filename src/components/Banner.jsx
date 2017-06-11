@@ -41,7 +41,9 @@ export default class Banner extends Component{
 		dots.reverse();
 
 		let config = {
-			callback: this.callback.bind(this)
+			callback: this.callback.bind(this),
+			auto: 2000,
+			speed:1000
 		}
 		
 		if(listHtml.length===0){

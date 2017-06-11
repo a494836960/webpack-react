@@ -2,9 +2,11 @@ module.exports = {
 	path:'/',
 	//TODO 没有index
 	getComponents(location,cb){
+		
 		require.ensure([],require=>{
 			console.log('root')
-			cb(null,require('page/index.jsx').default)
+			console.log('toor=d')
+			cb(null,require('page/Index.jsx').default)
 		},'root')
 	},
 

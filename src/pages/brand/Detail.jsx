@@ -1,4 +1,5 @@
 import React,{Component} from 'react';
+import ArticleDetail from 'component/ArticleDetail'
 
 export default class Detail extends Component{
 	constructor(props){
@@ -19,12 +20,9 @@ export default class Detail extends Component{
 	}
 
 	render(){
-
 		return (
 			<div className='article'>
-				<div className='article-body' dangerouslySetInnerHTML={{__html: this.state.articleContent}}>
-					 
-				</div>
+				<ArticleDetail articleContent={this.state.articleContent}/>
 			</div>
 		);
 	}

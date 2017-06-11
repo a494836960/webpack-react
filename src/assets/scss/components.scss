@@ -17,17 +17,24 @@
 		background-size: .45rem;
 	}
 	.left{
-		width: 1rem;
-		display: -webkit-box;
+	    width: 1rem;
+	    display: -webkit-box;
+	    -webkit-box-align: center;
+	    -webkit-box-pack: end;
 	}
 	.right{
 		width: 1rem;
 		display: -webkit-box;
+		-webkit-box-align: center;
 	}
 	.content{
 		text-align: center;
 		@include flex;
 		-webkit-box-flex:1;
+	}
+	.logo{
+		display: -webkit-box;
+		height: .5rem;
 	}
 }
 
@@ -190,5 +197,29 @@
 		font-size: .24rem;
 	    width: 100%;
     	text-align: right;
+	}
+}
+
+.sub-header{
+	position: relative;
+	font-size: .26rem;
+	background: #fff;
+	padding: .2rem .2rem .2rem .4rem;
+	border-bottom: 1px solid #e1e1e1;
+	&:before{
+		content:'';
+		position: absolute;
+		width: 3px;
+		background: $color-primary;
+	    height: .4rem;
+	    left: .2rem;
+	};
+}
+.friend-links{
+	background: #fff;
+	padding: .2rem;
+	.link{
+		display: inline-block;
+		margin-right: .2rem;
 	}
 }

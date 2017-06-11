@@ -14,11 +14,35 @@ module.exports = {
 		require.ensure([],require=>{
 			cb(null,[
 				{
-					path: 'honor',
+					path: 'qualification',
 					getComponents(location,cb){
 						require.ensure([],require=>{
 							console.log('Index')
-							cb(null,require('page/home/Index').default)
+							cb(null,require('page/home/Qualification').default)
+						},'home')
+					}
+				},{
+					path: 'development',
+					getComponents(location,cb){
+						require.ensure([],require=>{
+							console.log('Index')
+							cb(null,require('page/home/Development').default)
+						},'home')
+					}
+				},{
+					path: 'about',
+					getComponents(location,cb){
+						require.ensure([],require=>{
+							console.log('Index')
+							cb(null,require('page/home/About').default)
+						},'home')
+					}
+				},{
+					path: 'professional',
+					getComponents(location,cb){
+						require.ensure([],require=>{
+							console.log('Index')
+							cb(null,require('page/home/Professional').default)
 						},'home')
 					}
 				}

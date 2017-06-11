@@ -1,0 +1,11 @@
+module.exports = {
+	path:'user',
+
+	indexRoute:{
+		getComponents(location,cb){
+			require.ensure([],require=>{
+				cb(null,require('page/user/Login').default)
+			},'news')
+		}
+	},
+}

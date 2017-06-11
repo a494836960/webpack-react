@@ -37,7 +37,8 @@ module.exports = {
 			'page': path.join(__dirname,'../src/pages'),
 			'scss': path.join(__dirname,'../src/assets/scss'),
 			'action': path.join(__dirname,'../src/redux/action'),
-			'reducer': path.join(__dirname,'../src/redux/reducer')
+			'reducer': path.join(__dirname,'../src/redux/reducer'),
+			'verdor': path.join(__dirname,'../src/verdor')
 		},
 		 extensions: ['.js', '.jsx']
 	},
