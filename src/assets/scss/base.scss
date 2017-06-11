@@ -16,6 +16,12 @@ body{
     width : 100%;
     padding-top: $head-height; 
     height: 100%;
+    overflow-y: scroll;
+    box-sizing: border-box;
+}
+
+.tr{
+  text-align: right;
 }
 
 .fade-enter {
@@ -65,7 +71,7 @@ body{
   cursor: pointer;
   color: #fff;
   display: inline-block;
-  
+  text-align: center;
   @each $name,$color in (primary: $color-primary){
     &.btn-#{$name}{
       background-color: #{$color};
@@ -108,7 +114,10 @@ body{
 .nbb{
   border-bottom: 0px !important;
 }
-
+.price{
+  color: $color-primary;
+  font-size: .32rem;
+}
 /*品牌活动*/
 .activity-item{
   margin-top: .2rem;
@@ -390,7 +399,6 @@ body{
 
 .login-logo {
     width: 3rem;
-    margin-bottom: .5rem;
     margin-top: .5rem;
 }
 
@@ -414,7 +422,11 @@ body{
     -webkit-appearance:none;
     background: transparent;
     font-size: .32rem;
-
+  }
+  .verify{
+    display: -webkit-box;
+    border-left: 1px solid #e1e1e1;
+    padding: .1rem .2rem;
   }
 }
 
@@ -437,4 +449,146 @@ html,body,#container, #container>div{
     text-align: center;
     height: 100%;
     border-top: 1px solid #e1e1e1;
+    box-sizing: border-box;
+}
+
+/*订单模块*/
+.order-container{
+  @include flex(horizontal,start,start);
+  background: #fff;
+  .order-menu{
+    display: -webkit-box;
+    width: 2rem;
+    -webkit-box-orient: vertical;
+    font-size: .24rem;
+    color: #575757;
+    .item{
+      background: #FAFAFA;
+      border-bottom: 1px solid #D6D7DC;
+      border-right: 1px solid #D6D7DC;
+      padding: .2rem;
+      &.active{
+        background: #fff;
+        border-right: 0;
+        border-left: 1px solid $color-primary;
+      }
+    }
+  }
+  .order-sub-list{
+       display: -webkit-box;
+      -webkit-box-flex: 1;
+      -webkit-box-orient: vertical;
+      margin: 0 .2rem;
+      border-bottom: 1px solid #e1e1e1;
+      padding: .2rem 0;
+      background-color: white;
+    .order-sub-item{
+      @include flex;
+      padding: .2rem 0;
+      border-bottom: 1px solid #e1e1e1;
+      &:last-of-type{
+        border-bottom:0;
+      }
+      .order-sub-left{
+        display: -webkit-box;
+        -webkit-box-flex: 1;
+        -webkit-box-orient: vertical;
+        line-height: .4rem;
+      }
+      .order-sub-right{
+         display: -webkit-box;
+        -webkit-box-orient: vertical;
+        height: 1.2rem;
+      }
+
+      .order-sub-name{
+        font-size: .26rem;
+        color: #2d2d2d;
+      }
+      .order-sub-model{
+        color: #555555;
+        font-size: .24rem;
+      }
+      .order-sub-price{
+        color: $color-primary;
+        font-size: .28rem
+      }
+      .order-sub-expired{
+        font-size: .24rem;
+        color: #555;
+        line-height: .4rem;
+      }
+      .order-sub-number{
+        display: -webkit-box;
+        -webkit-box-flex:1;
+        -webkit-box-align:center;
+        -webkit-box-pack: end;
+      }
+    }
+  }
+}
+
+.minus{
+  width: .4rem;
+  height: .4rem;
+  background-image: url('../imgs/order/minus.png');
+  vertical-align: middle;
+  margin-right: .1rem;
+}
+.plus{
+  width: .4rem;
+  height: .4rem;
+  background-image: url('../imgs/order/plus.png');
+  vertical-align: middle;
+  margin-left: .1rem;
+}
+.order-btn-submit{
+  position: fixed;
+  height: 1rem;
+  text-align: center;
+  width: 100%;
+  font-size: .32rem;
+  bottom: 0;
+  line-height: 1rem;
+  background: #fff;
+}
+
+.detail-list{
+  background: #fff;
+  margin-top: .2rem;
+
+  .detail-list-head{
+    padding: .25rem .3rem;
+    color: #323232;
+    font-size: .32rem;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .detail-list-item{
+    padding: .25rem .3rem;
+    @include flex(horizontal,start,end);
+    border-bottom: 1px solid #e1e1e1;
+    .detail-list-item-left{
+      display: -webkit-box;
+      font-size: .28rem;
+      color: #555;
+    }
+
+    .detail-list-item-right{
+       display: -webkit-box;
+      -webkit-box-flex:1;
+      font-size: .28rem;
+      -webkit-box-pack:end;
+      color: #555;
+      .number{
+        font-size: .24rem;
+        color: #8E8E8E;
+      }
+      .price{
+        color: $color-primary;
+        font-size: .32rem;
+        margin-left: .2rem;
+      }
+    }
+  }
 }

@@ -20,12 +20,13 @@
 	    width: 1rem;
 	    display: -webkit-box;
 	    -webkit-box-align: center;
-	    -webkit-box-pack: end;
+	    -webkit-box-pack: center;
 	}
 	.right{
 		width: 1rem;
 		display: -webkit-box;
 		-webkit-box-align: center;
+		 -webkit-box-pack: center;
 	}
 	.content{
 		text-align: center;
@@ -72,7 +73,7 @@
 }
 
 .side-menu{
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;

@@ -5,7 +5,22 @@ module.exports = {
 		getComponents(location,cb){
 			require.ensure([],require=>{
 				cb(null,require('page/user/Login').default)
-			},'news')
+			},'user')
 		}
 	},
+
+	getChildRoutes(location,cb){
+		require.ensure([],require=>{
+			cb(null,[
+				{
+					path:'forgetPassword',
+					getComponents(location,cb){
+						require.ensure([],require=>{
+							cb(null,require('page/user/ForgetPassword').default)
+						},'user')
+					}
+				}
+			])
+		})
+	}
 }

@@ -36,19 +36,19 @@ class Head extends Component {
 	}
 
 	render(){
-		console.log(this.state.hasRight)
+		console.log(this.state,'right')
 		if(this.state.isHome){
 			return (<div className="head">
-						<div className='left' onClick={this.showMenu.bind(this)}>菜单</div>
+						<div className='left iconfont' onClick={this.showMenu.bind(this)}>&#xe61b;</div>
 						<div className='content'><img className='logo' src={require('img/index/top-logo.png')}/></div>
-						{this.state.isLogin ?<Link className='right' to='/home'></Link>: <Link className='right' to='/user/login'>登录</Link>}
+						{this.state.isLogin ?<Link className='right' to='/home'></Link>: <Link className='right' to='/user'>登入</Link>}
 					</div>)
 		}
 
 		return (<div className="head">
 					<div className='left back icon' onClick={this.handleClick.bind(this)}></div>
 					<div className='content'>{this.state.title}</div>
-					{this.state.hasRight && (this.state.isLogin ?<Link className='right' to='/home'>首页</Link>: <Link className='right' to='/user/login'>登录</Link>)}
+					{this.state.hasRight ? (this.state.isLogin ?<Link className='right iconfont' to='/home'>&#xe608;</Link>: <Link className='right' to='/user'>登入</Link>) : <Link className='right'></Link>}
 			</div>)
 	}
 }

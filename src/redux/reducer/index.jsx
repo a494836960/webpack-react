@@ -8,8 +8,8 @@ function setHead (state={title:'首页',isHome: false}, action){
 				action.head.isHome = false;
 			}
 
-			if(!action.head.hasRight){
-				action.head.hasRight = false;
+			if(typeof action.head.hasRight == 'undefined'){
+				action.head.hasRight = true;
 			}
 
 			return Object.assign({},state,action.head);

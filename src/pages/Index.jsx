@@ -56,9 +56,12 @@ class Index extends Component{
                 icon:require('img/index/order-search.png')
             },{
                 id:'8',
-                url:'',
+                url:'/user/login',
                 name: '退出登入',
-                icon:require('img/index/join.png')
+                icon:require('img/index/join.png'),
+                onClick:()=>{
+                    console.log('tuichu')
+                }
             },
         ]
 	}
