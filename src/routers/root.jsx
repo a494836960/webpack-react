@@ -1,11 +1,13 @@
 module.exports = {
 	path:'/',
+	indexRoute:{
+		onEnter: (_, replaceState) => {
+			replaceState('/home')
+		}
+	},
 	//TODO 没有index
 	getComponents(location,cb){
-		
 		require.ensure([],require=>{
-			console.log('root')
-			console.log('toor=d')
 			cb(null,require('page/Index.jsx').default)
 		},'root')
 	},
@@ -19,7 +21,8 @@ module.exports = {
 				require('./order.jsx'), //订单相关
 				require('./user.jsx'),	//登录注册之类
 				require('./join.jsx'), //在线加盟
-				require('./home.jsx')
+				require('./home.jsx'),
+				require('./redirect.jsx')
 			])
 		})
 	}

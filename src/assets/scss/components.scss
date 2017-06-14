@@ -13,8 +13,8 @@
 		height: 100%;
 	}
 	.back{
-		background-image: url('../imgs/icon_back.png');
-		background-size: .45rem;
+		color: #333;
+		font-weight: bold;
 	}
 	.left{
 	    width: 1rem;
@@ -222,5 +222,38 @@
 	.link{
 		display: inline-block;
 		margin-right: .2rem;
+	}
+}
+.ordered-list{
+	background: #fff;
+	padding: 0 .35rem;
+	margin-top: .2rem;
+}
+.ordered-item{
+	border-bottom: 1px dashed #e1e1e1;
+	padding: .2rem 0;
+	line-height: .5rem;
+	.ordered-item-name{
+		font-size: .32rem;
+		color: #323232;
+	}
+	.ordered-item-status{
+		float: right;
+		color: $color-primary;
+	}
+	.ordered-item-date{
+		font-size: .24rem;
+		color: #555;
+	}
+	.ordered-item-number{
+		font-size: .26rem;
+		color: #555;
+	}
+	.ordered-item-footer{
+		text-align: right;
+		.btn{
+			margin-left: .3rem;
+			padding: .05rem .1rem;
+		}
 	}
 }

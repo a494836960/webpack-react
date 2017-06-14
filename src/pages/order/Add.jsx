@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import Banner from 'component/Banner';
 import {connect} from 'react-redux';
 import * as actions from 'action/Index';
-import OrderItem from 'component/OrderItem'
+import GoodsItem from 'component/GoodsItem'
 
 class Add extends Component{
 
@@ -45,7 +45,7 @@ class Add extends Component{
 							<li className='item'>57加盟店酱料订单</li>
 						</ul>
 						<ul className='order-sub-list'>
-							<OrderItem/>
+							<GoodsItem/>
 						</ul>
 					</div>
 				</div>

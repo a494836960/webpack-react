@@ -1,53 +1,23 @@
 import React,{Component} from 'react';
-import {connect} from 'react-redux';
+import {Link} from 'react-router';
 
-class OrderItem extends Component {
-
-	constructor(props){
-		super(props);
-		this.state={
-			order:{
-				name:'孜然粉（01.30.0205）',
-				model:'2.5KG/袋*4袋/箱',
-				price: '567.40/箱',
-				expired:'1年',
-				number: 0
-			}
-		}
-	}
-
-	plusNum(){
-		this.state.order.number++
-		this.setState({})
-	}
-
-	minusNum(){
-		this.state.order.number--
-		if(this.state.order.number < 0){
-			this.state.order.number = 0;
-		}
-		this.setState({})
-	}
-
-	render (){
-
-		return (
-			<li className='order-sub-item'>
-				<div className='order-sub-left'>
-					<p className='order-sub-name'> {this.state.order.name}</p>
-					<p className='order-sub-model'>规格：{this.state.order.model}}</p>
-					<p className='order-sub-price'>&yen; {this.state.order.price}</p>
+export default class OrderItem extends Component{
+	render(){
+		return(
+			<div className='ordered-item'>
+				<div className='ordered-item-body'>
+					<p>
+						<span className='ordered-item-name'>57加盟店酱料订单</span>
+						<span className='ordered-item-status'>订单正在审核中</span>
+					</p>
+					<p><span className='ordered-item-date'>2017-05-23 12:27</span></p>
+					<p><span className='ordered-item-number'>订单号：40021545</span></p>
 				</div>
-				<div className='order-sub-right'>
-					<p className='order-sub-expired'>保质期：{this.state.order.expired}</p>
-					<p className='order-sub-number'> 
-						{this.state.order.number ? <i className='minus icon' onClick={this.minusNum.bind(this)}></i> : null}
-						{this.state.order.number}
-						 <i className='icon plus' onClick={this.plusNum.bind(this)}></i></p>
+				<div className='ordered-item-footer'>
+					<Link className='btn btn-ghost btn-primary'>订单详情</Link>
+					<span className='btn btn-ghost btn-dangerous'>删除订单</span>
 				</div>
-			</li>
+			</div>
 		);
 	}
-}
-
-export default connect()(OrderItem)
+} 

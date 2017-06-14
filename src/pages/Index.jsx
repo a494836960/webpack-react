@@ -120,7 +120,8 @@ function selector (state,filter){
         head:{
             title: state.setHead.title,
             isHome: state.setHead.isHome,
-            hasRight: state.setHead.hasRight
+            hasRight: state.setHead.hasRight,
+            cls: state.setHead.cls
         },
         sideMenu:{
             isShow: state.toggleMenu.isShow

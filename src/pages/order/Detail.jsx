@@ -5,14 +5,26 @@ import * as actions from 'action/Index';
 class Detail extends Component{
 
 	componentWillMount(){
-		this.props.dispatch(actions.setHead({title: '订单详情'}));
+		this.props.dispatch(actions.setHead({title: '订单详情',cls:'order-head'}));
 	}
 
 	render(){
 		return(
 			<div style={{paddingBottom:'.3rem'}}>
+				<div className='order-info'>
+					<img className='bg-img' src={require('img/order/order-bg.png')}/>
+					<div className='order-info-body'>
+						<img className='small-icon' src={require('img/order/small-icon.png')} alt="" />
+						<div className='order-info-content'>
+							<p className='title'>57加盟店酱料订单</p>
+							<p className='date'>下单时间：2017-6-1 15：30</p>
+						</div>
+					</div>
+					<div className='order-info-footer'>	
+						<span className='order-number'> <i className='iconfont'>&#xe622;</i> 订单号：6546465465</span> <span>正在审核</span>
+					</div>
+				</div>
 				<dl className = 'detail-list'>
-					<dt className='detail-list-head'>57加盟店酱料订单</dt>
 					<dd className='detail-list-item'> 
 						<span className='detail-list-item-left'>酱辣子（12333）</span>  
 						<span className='detail-list-item-right'>

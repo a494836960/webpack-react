@@ -12,6 +12,10 @@ function setHead (state={title:'首页',isHome: false}, action){
 				action.head.hasRight = true;
 			}
 
+			if(typeof action.head.cls == 'undefined'){
+				action.head.cls = null;
+			}
+
 			return Object.assign({},state,action.head);
 		break;
 		default: 

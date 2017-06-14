@@ -10,7 +10,8 @@ class Head extends Component {
 			title:this.props.head.title,
 			isLogin: false,
 			isHome: true,
-			hasRight: true
+			hasRight: true,
+			cls: ''
 		}
 	}	
 
@@ -19,7 +20,8 @@ class Head extends Component {
 			title: nextProps.head.title,
 			isLogin: nextProps.isLogin,
 			isHome: nextProps.head.isHome,
-			hasRight: nextProps.head.hasRight
+			hasRight: nextProps.head.hasRight,
+			cls: nextProps.head.cls
 		})
 	}
 
@@ -36,17 +38,16 @@ class Head extends Component {
 	}
 
 	render(){
-		console.log(this.state,'right')
 		if(this.state.isHome){
-			return (<div className="head">
+			return (<div className={(this.state.cls ? this.state.cls : '') +' head'}>
 						<div className='left iconfont' onClick={this.showMenu.bind(this)}>&#xe61b;</div>
 						<div className='content'><img className='logo' src={require('img/index/top-logo.png')}/></div>
 						{this.state.isLogin ?<Link className='right' to='/home'></Link>: <Link className='right' to='/user'>登入</Link>}
 					</div>)
 		}
 
-		return (<div className="head">
-					<div className='left back icon' onClick={this.handleClick.bind(this)}></div>
+		return (<div className={(this.state.cls ? this.state.cls : '') +' head'}>
+					<div className='left iconfont back' onClick={this.handleClick.bind(this)}>&#xe60b;</div>
 					<div className='content'>{this.state.title}</div>
 					{this.state.hasRight ? (this.state.isLogin ?<Link className='right iconfont' to='/home'>&#xe608;</Link>: <Link className='right' to='/user'>登入</Link>) : <Link className='right'></Link>}
 			</div>)
