@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "redux-thunk": "^2.2.0",
+    "rodal": "^1.5.2",
     "whatwg-fetch": "^2.0.3"
   }
 }

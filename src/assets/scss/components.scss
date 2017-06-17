@@ -17,13 +17,13 @@
 		font-weight: bold;
 	}
 	.left{
-	    width: 1rem;
+	    width: .8rem;
 	    display: -webkit-box;
 	    -webkit-box-align: center;
 	    -webkit-box-pack: center;
 	}
 	.right{
-		width: 1rem;
+		width: .8rem;
 		display: -webkit-box;
 		-webkit-box-align: center;
 		 -webkit-box-pack: center;
@@ -55,7 +55,7 @@
 
 	.dots{
 		position: absolute;
-		bottom: .5rem;
+		bottom: .2rem;
 		left: 50%;
 		transform: translate(-50%);
 		li{
@@ -255,5 +255,17 @@
 			margin-left: .3rem;
 			padding: .05rem .1rem;
 		}
+	}
+}
+
+.alert{
+	.alert-body{
+		border-bottom: 1px solid #e1e1e1;
+		padding: .3rem 0;
+		text-align: center;
+	}
+	.alert-footer{
+		text-align: center;
+	    padding-top: 15px;
 	}
 }

@@ -1,13 +1,16 @@
  import React,{Component} from 'react';
 import {connect} from 'react-redux';
-import * as actions from 'action/Index'
-import Banner from 'component/Banner'
+import * as actions from 'action/Index';
+import Banner from 'component/Banner';
+import Alert from 'component/Alert';
 class Join extends Component{
 	
 	constructor(props){
 		super(props);
 		this.state={
-			banner: []
+			banner: [],
+			data:{
+			}
 		}
 	}
 
@@ -18,9 +21,21 @@ class Join extends Component{
 		}]
 	}
 
+	handleSubmit(){
+		this.refs.alert.show({
+			title:'提交成功',
+			body:'提交完成等待客服确认中。。。'
+		});
+	}
+
+	handleReset(){
+
+	}
+
 	render(){
 		return(
 			<div style={{background:'#fff'}}>
+				<Alert ref='alert'/>
 				<Banner list={this.state.banner}/>
 				<div className='wrap-emphasis'>
 					<span className='emphasis'>我们在这里向您承若</span>
@@ -93,24 +108,18 @@ class Join extends Component{
 						<textarea className='form-input'></textarea>
 					</div>
 					<div className='tc'>
-						<span className='btn btn-primary' style={{marginRight:".3rem"}}>提交信息</span>
-						<span className='btn btn-primary btn-ghost'>重置信息</span>
+						<span className='btn btn-primary btn-ghost' style={{marginRight:".3rem"}} onClick={this.handleSubmit.bind(this)}>提交信息</span>
+						<span className='btn btn-primary btn-ghost' onClick={this.handleReset.bind(this)}>重置信息</span>
 					</div>
+				</div>
+				<div className='index-info-footer'>
+					<span className='content'></span>
+					<span className='txt'><img src={require('img/join/join-footer.png')}/></span>	
 				</div>
 				<div className='join-footer'>
-					<img src={require('img/index/menu-logo.png')}/>
-					<div>
-						<p className='name'>
-							五十七度湘餐饮管理有限公司
-						</p>
-						<p className='phone'>
-							招商电话  0731-84895757/82258857
-						</p>
-						<p className='address'>
-							地址：长沙市天心区芙蓉中路三段142号发展大厦B座9楼
-						</p>
-					</div>
+					<img src={require('img/join/join-bottom.png')}/>
 				</div>
+				<div className='join-bottom-line'></div>
 			</div>
 		)
 	}

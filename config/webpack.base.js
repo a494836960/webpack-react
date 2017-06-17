@@ -23,8 +23,12 @@ module.exports = {
 			},{
 				test: /\.scss$/,
 				loader: extract.extract({fallback:'style-loader',use:['css-loader','postcss-loader','sass-loader']})
+			},
+			{
+				test: /\.css$/,
+				loader: extract.extract({fallback:'style-loader',use:['css-loader']})
 			},{
-				test:/\.(jpg|jpeg|png|gif)/,
+				test:/\.(jpg|jpeg|png|gif|eot|svg|ttf|woff)/,
 				loader:'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
 				exclude:excludeReg
 			}

@@ -4,7 +4,7 @@ import Head from 'component/Head'
 import * as actions from 'action/index';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group" ;
 import SideMenu from 'component/SideMenu'
-import {Link} from 'react-router'
+import {Link} from 'react-router';
 
 class Index extends Component{
 

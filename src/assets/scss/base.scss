@@ -64,7 +64,7 @@ body{
 
 /*按钮*/
 .btn {
-  padding: .1rem .2rem;
+  padding: .1rem .5rem;
   font-size: .28rem;
   border-radius: 3px;
   border: 0px;
@@ -78,9 +78,6 @@ body{
     &.btn-#{$name}{
       background-color: #{$color};
 
-      &:hover{
-        background-color: darken($color,10%)
-      }
       &:active{
         background-color: lighten($color,10%)
       }
@@ -89,13 +86,9 @@ body{
         background-color: transparent;
         color: $color;
         border: 1px solid $color;
-        &:hover{
-          background-color: darken($color,10%);
-          color: #fff;
-        }
 
         &:active{
-          background:$color;
+          background-color: lighten($color,10%);
           color: #fff;
         }
       }
@@ -386,8 +379,8 @@ body{
   background: #fff;
   .index-btn{
     display: inline-block;
-    padding: .1rem .4rem;
-    border: 1px solid #999;
+    padding: .1rem .8rem;
+    border: 1px solid #e1e1e1;
     border-radius: 3px;
     &:active{
       color: #fff;
@@ -404,8 +397,8 @@ body{
 }
 
 .login-logo {
-    width: 3rem;
-    margin-top: .5rem;
+    width: 2rem;
+    margin: .8rem 0 1rem 0;
 }
 
 .wrap-input{
@@ -663,9 +656,12 @@ html,body,#container, #container>div{
 }
 
 /*招商加盟*/
-.join-head{
+.join-head.head{
   background: url('../imgs/join/nav-bg.png') no-repeat;
   background-size: cover;
+  .back{
+    color: #fff;
+  }
 }
 .emphasis{
   background: #f4f4f4;
@@ -804,6 +800,7 @@ html,body,#container, #container>div{
     }
   }
 }
+
 .form{
   padding:.7rem .3rem;
   border-top: 1px solid #e4e4e4;
@@ -811,7 +808,7 @@ html,body,#container, #container>div{
   background: #fafafa;
   .form-label{
     font-size: .24rem;
-    color: #323232;
+    color: #555;
     margin-bottom: .1rem;
     font-weight: 700;
     width: 2rem;
@@ -848,8 +845,8 @@ html,body,#container, #container>div{
 
 input[type=radio]{
       -webkit-appearance: none;
-      width: .4rem;
-      height: .4rem;
+      width: .3rem;
+      height: .3rem;
       background: #fff;
       border-radius: 50%;
       border: 3px solid #D6D7DC;
@@ -867,21 +864,84 @@ input[type=radio]:checked{
   color: #fff;
   padding: .5rem;
   background: $color-primary;
+  margin: .2rem .2rem 0 .3rem;
+  position: relative;
+  &:before{
+    content: '';
+    position: absolute;
+    top: -.2rem;
+    width: calc(50% + .14rem);
+    background: #e4e4e3;
+    height: 2px;
+    left: -.15rem;
+  }
+  &:after{
+    z-index: 10;
+    content: '';
+    position: absolute;
+    top: -.2rem;
+    width: 2px;
+    background: #e4e4e3;
+    height: calc(100% + .3rem);
+    left: -.15rem;
+  }
+
   img{
-    width: 3rem;
+    width: 4.5rem;
   }
-  .name{
-    font-size: .32rem;
-    border-bottom: 2px solid #fafafa;
-      padding: .2rem 0;
+}
+
+.index-info-footer{
+  height: 1.5rem;
+  position: relative;
+  &:before{
+    content:'';
+    background: #e4e4e4;
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
   }
-  .phone{
-    font-size: .28rem;
-    border-bottom: 1px solid #fff;
-     padding: .2rem 0;
+  .txt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
   }
-  .address{
-    font-size: .24rem;
-    padding-top: .2rem; 
+  img{
+      height: .5rem;
+      margin-left: -.87rem;
+      margin-top: -.15rem;
   }
+}
+.join-bottom-line{
+  background: #fff;
+  position: relative;
+  height: .4rem;
+  &:before{
+    content:'';
+    position:absolute;
+    top: .1rem;
+    left: .15rem;
+    height: 2px;
+    width: 50%;
+    background: #e4e4e4;
+  }
+  &:after{
+    content: '';
+    position: absolute;
+    top: .24rem;
+    width: 4px;
+    background: #FF6700;
+    border-radius: 50%;
+    height: 4px;
+    left: calc(50% + .15rem);
+  }
+}
+.rodal-dialog {
+  width: 80% !important;
+  box-sizing: content-box !important;
+  top: 30% !important;
+  height: initial !important;
+  bottom: initial !important;
 }
