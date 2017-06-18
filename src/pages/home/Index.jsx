@@ -4,6 +4,7 @@ import * as actions from 'action/Index';
 import Banner from 'component/Banner'
 import {Link} from 'react-router';
 
+
  class Index extends Component{
  	constructor(props){
  		super(props);
@@ -15,21 +16,11 @@ import {Link} from 'react-router';
 
  	componentWillMount(){
  		this.props.dispatch(actions.setHead({isHome:true}));
+ 		this.props.dispatch(actions.getHome());
  	}
 
  	componentDidMount(){
- 		this.state.list=[
- 		{
- 			banner: require('img/index/banner.png'),
-			url: null
- 		},{
- 			banner:  require('img/index/banner.png'),
-			url: null
- 		},{
- 			banner:  require('img/index/banner.png'),
-			url: null
- 		}]
-
+ 	
  		this.state.sections = [
  			{
  				title:'关于我们',
@@ -54,7 +45,7 @@ import {Link} from 'react-router';
 	}
 
 	render(){
-
+		console.log(this.props.banner);
 		let sectionHtml = [];
 		this.state.sections.map((item,index)=>{
 			sectionHtml.push(
@@ -79,7 +70,7 @@ import {Link} from 'react-router';
 		return(
 			<div>
 				<div>
-					<Banner list={this.state.list}/>
+					<Banner list={this.props.banner}/>
 				</div>
 				<div>{sectionHtml}
 					{/*资质荣誉*/}
@@ -151,11 +142,18 @@ import {Link} from 'react-router';
 				</div>
 
 				<div className='index-footer'>
-					长沙五十七度湘餐饮管理有限公司 <span style={{'color': '#ccc'}}>版权所有</span>	
+					<p className='mb1'>&copy; 2017 GLOBAL TRADING CENTER 湘ICP备14018756</p>
+					<p>长沙五十七度湘餐饮管理有限公司 <span style={{'color': '#ccc'}}>版权所有</span></p>
 				</div>
 			</div>
 		)
 	}
 }
 
-export default connect()(Index)
+function selector(state){
+	return {
+		banner: state.home.banner
+	}
+}
+
+export default connect(selector)(Index)

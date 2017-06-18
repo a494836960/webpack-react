@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {hashHistory, Link} from 'react-router';
+import {hashHistory,location, Link} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from 'action/Index'
 
@@ -37,19 +37,28 @@ class Head extends Component {
 		this.props.dispatch(actions.toggleMenu());
 	}
 
+	goLogin(){
+		hashHistory.push({
+			pathname:'/user',
+			query:{
+				from: hashHistory.getCurrentLocation().pathname
+			}
+		})
+	}
+
 	render(){
 		if(this.state.isHome){
 			return (<div className={(this.state.cls ? this.state.cls : '') +' head'}>
 						<div className='left iconfont' onClick={this.showMenu.bind(this)}>&#xe61b;</div>
 						<div className='content'><img className='logo' src={require('img/index/top-logo.png')}/></div>
-						{this.state.isLogin ?<Link className='right' to='/home'></Link>: <Link className='right' to='/user'>登入</Link>}
+						{this.state.isLogin ?<Link className='right'></Link>: <Link className='right' onClick={this.goLogin.bind(this)}>登入</Link>}
 					</div>)
 		}
 
 		return (<div className={(this.state.cls ? this.state.cls : '') +' head'}>
 					<div className='left iconfont back' onClick={this.handleClick.bind(this)}>&#xe60b;</div>
 					<div className='content'>{this.state.title}</div>
-					{this.state.hasRight ? (this.state.isLogin ?<Link className='right iconfont' to='/home'>&#xe608;</Link>: <Link className='right' to='/user'>登入</Link>) : <Link className='right'></Link>}
+					{this.state.hasRight ? (this.state.isLogin ?<Link className='right iconfont' to='/home'>&#xe608;</Link>: <Link className='right'  onClick={this.goLogin.bind(this)}>登入</Link>) : <Link className='right'></Link>}
 			</div>)
 	}
 }

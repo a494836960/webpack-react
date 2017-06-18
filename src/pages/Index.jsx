@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import Head from 'component/Head'
 import * as actions from 'action/index';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group" ;
-import SideMenu from 'component/SideMenu'
+import SideMenu from 'component/SideMenu';
+import {Tips} from 'component/Alert';
 import {Link} from 'react-router';
+import tools from 'verdor/tools';
 
 class Index extends Component{
 
@@ -36,7 +38,7 @@ class Index extends Component{
                 icon:require('img/index/join.png')
             },{
                 id:'4',
-                url:'/order/submit',
+                url:'/order',
                 name: '提交订单',
                 icon:require('img/index/submit-order.png')
             },{
@@ -56,20 +58,33 @@ class Index extends Component{
                 icon:require('img/index/order-search.png')
             },{
                 id:'8',
-                url:'/user/login',
+                url:'/user',
                 name: '退出登入',
                 icon:require('img/index/join.png'),
-                onClick:()=>{
-                    console.log('tuichu')
+                onClick:(props,url)=>{
+                    if(props.user.isLogin){ //如果是登陆状态
+                        tools.fetch().then(response=>{
+                            props.dispatch(actions.setUser({isLogin: false}));
+                            props.router.push(url);
+                            props.dispatch(actions.toggleMenu(false));
+                        })
+                    } else {
+                        props.router.push(url);
+                        props.dispatch(actions.toggleMenu(false));
+                    }
                 }
             },
         ]
 	}
 
-
-    forward(url){
-        this.props.router.push(url);
-        this.props.dispatch(actions.toggleMenu(false));
+    forward(url,cb){
+       
+        if(cb){
+            cb(this.props,url);
+        }else{
+            this.props.router.push(url);
+            this.props.dispatch(actions.toggleMenu(false));
+        }
     }
 
 	render(){
@@ -77,12 +92,11 @@ class Index extends Component{
         let navListHtml =[];
         this.state.navList.map((item,index)=>{
             navListHtml.push(<dd className={`${item.active ?'active' : ''} menu-item`} key={index} >
-                <div className='menu-body' style={{'backgroundImage':`url(${item.icon})`}} onClick={this.forward.bind(this,item.url)}>
+                <div className='menu-body' style={{'backgroundImage':`url(${item.icon})`}} onClick={this.forward.bind(this,item.url,item.onClick)}>
                     <span>{item.name}</span>
                 </div>
             </dd>)
         });
-
 		return(
 		<div>
 			<Head head={this.props.head} isLogin={this.props.user.isLogin}></Head>
@@ -109,13 +123,13 @@ class Index extends Component{
                     {navListHtml}
                 </dl>
              </SideMenu>
+            <Tips txt={this.props.tips}></Tips>
 		</div>
 		);
 	}
 }
 
 function selector (state,filter){
-    console.log(state)
 	return {
         head:{
             title: state.setHead.title,
@@ -128,6 +142,9 @@ function selector (state,filter){
         },
         user:{
             isLogin: state.user.isLogin
+        },
+        tips:{
+            txt: state.showTip.txt
         }
     };
 }

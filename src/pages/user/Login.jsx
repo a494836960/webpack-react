@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {tools} from 'verdor/tools';
+import tools from 'verdor/tools';
 import {connect} from 'react-redux';
 import * as actions from 'action/Index';
 import {Link} from 'react-router';
@@ -26,7 +26,30 @@ class Login extends Component{
 	}
 
 	handleSubmit(){
-		console.log(this)
+		let {dispatch} = this.props;
+		if(!this.state.username){
+			dispatch(actions.showTips({txt:'请输入用户名！'}));
+			return;
+		}
+
+		if(!this.state.password){
+			dispatch(actions.showTips({txt:'请输入密码'}));
+			return;
+		}
+		
+		tools.fetch({}).then(()=>{
+			if(true){
+				let from =this.props.location.query.from;
+				if(!from){
+					from='home'
+				}
+				dispatch(actions.setUser({isLogin:true}));
+				this.props.router.replace({
+					pathname: from
+				})
+			}
+		});
+
 	}
 
 	render(){

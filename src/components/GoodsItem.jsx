@@ -29,6 +29,10 @@ class GoodsItem extends Component {
 		this.setState({})
 	}
 
+	componentWillReceiveProps(nextProps){
+		this.state.order = nextProps.order;
+	}
+
 	render (){
 
 		return (

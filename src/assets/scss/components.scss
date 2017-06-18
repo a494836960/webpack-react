@@ -269,3 +269,20 @@
 	    padding-top: 15px;
 	}
 }
+
+.tips{
+	position: fixed;
+	top: 40%;
+	width: 80%;
+	left: 10%;
+	background: #333;
+	color: #fff;
+	border-radius: 5px;
+	text-align: center;
+	padding: .3rem;
+	transition: all .5s;
+	box-sizing: border-box;
+	&.tips-hidden{
+		opacity: 0;
+	}
+}

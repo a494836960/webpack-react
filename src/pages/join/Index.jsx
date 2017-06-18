@@ -2,7 +2,7 @@
 import {connect} from 'react-redux';
 import * as actions from 'action/Index';
 import Banner from 'component/Banner';
-import Alert from 'component/Alert';
+import {Alert} from 'component/Alert';
 class Join extends Component{
 	
 	constructor(props){

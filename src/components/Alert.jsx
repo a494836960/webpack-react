@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 
-export default class Alert extends Component{
+class Alert extends Component{
 	constructor(props){
 		super(props);
 
@@ -46,6 +46,64 @@ export default class Alert extends Component{
 			</Rodal>
 		);
 	}
-
 }
 
+class Tips extends Component{
+
+	constructor(props){
+		super(props);
+
+		this.state={
+			visible: false,
+			txt:''
+		}
+	}
+
+	componentWillReceiveProps(nextProps){
+		console.log(nextProps.txt)
+		if(!(nextProps.lastTime == nextProps.lastTime  && !nextProps.txt.txt)){
+			this.show(nextProps.txt.txt,500);
+		}
+	}
+
+	show(txt,duration = 500){
+		this.setState({
+			visible: true,
+			txt:txt
+		});
+
+		setTimeout(()=>{
+			this.hidden();
+		},duration);
+	}
+
+	hidden(){
+		this.setState({
+			hidden: true
+		})
+
+		setTimeout(()=>{
+			this.hide()
+		},500);
+	}
+
+	hide(){
+		this.setState({
+			visible: false,
+			hidden: false
+		});
+	}
+	
+	render(){
+		if(!this.state.visible){
+			return null;
+		}
+		return(
+			<div className={`${this.state.hidden ? 'tips-hidden' : ''} tips`}>
+				{this.state.txt}
+			</div>
+		);
+	}
+}
+
+export {Alert, Tips}

@@ -42,7 +42,17 @@ function user (state={isLogin: false},action){
 	switch(action.type){
 		case actions.SET_USER:
 
+			if(action.user.isLogin === false){  //清空用户数据
+				action.user = {
+					isLogin: false
+				};
+			}
+
 			return Object.assign({},state,action.user);
+		break;
+
+		case actions.GET_USER:
+			
 		break;
 
 		default: 
@@ -51,8 +61,34 @@ function user (state={isLogin: false},action){
 	}
 }
 
+
+function home (state={banner:[]}, action){
+	switch(action.type){
+		case actions.GET_HOME:
+		return Object.assign({},state,action.home);
+
+		default :
+
+		return state;
+	}
+}
+
+function showTip (state={txt:''},action){
+	switch(action.type){
+		case actions.SHOW_TIPS:
+		action.txt.lastTime = +new Date();
+		return action.txt;
+		break;
+
+		default:
+		return state;
+	}
+}
+
 export default combineReducers({
 	toggleMenu,
 	setHead,
-	user
+	user,
+	home,
+	showTip
 })
