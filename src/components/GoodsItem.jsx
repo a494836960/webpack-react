@@ -6,13 +6,7 @@ class GoodsItem extends Component {
 	constructor(props){
 		super(props);
 		this.state={
-			order:{
-				name:'孜然粉（01.30.0205）',
-				model:'2.5KG/袋*4袋/箱',
-				price: '567.40/箱',
-				expired:'1年',
-				number: 0
-			}
+			order:this.props.order
 		}
 	}
 

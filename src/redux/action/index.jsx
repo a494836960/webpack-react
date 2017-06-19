@@ -21,19 +21,30 @@ export function showTips(txt){
 }
 
 
-
 /************* user ****************/
+
 export function getUser(){
+
 	return function (dispath){
-		return tools.fetch().then(respone=>{
+		let user = SS.getItem('user');
+		if(user.lastTime && new Date() - user.lastTiem <= 3600 * 24 * 1000){
 			dispath({
-				type: GET_USER,
-				user:{
-					isLogin: true,
-					lastTime: 123123
-				}
+					type: GET_USER,
+					user
+				})
+		} else {
+			return tools.fetch().then(response=>{
+				response.lastTime = +new Date();
+				response.isLogin = true;
+				tools.SS.setItem('user', response);
+				dispath({
+					type: GET_USER,
+					user:{
+						response
+					}
+				})
 			})
-		})
+		}
 	}
 }
 
@@ -77,3 +88,4 @@ export function getHome(){
 		}
 	}
 }
+

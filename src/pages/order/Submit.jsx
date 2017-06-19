@@ -9,35 +9,27 @@ class Submit extends Component{
 	}
 
 	render(){
+		let data = this.props.location.state;
+		let items = [];
+		data.order.subList.map((item,index)=>{
+			if(item.number != 0){
+				items.push(<dd className='detail-list-item' key={index}> 
+						<span className='detail-list-item-left'>{item.name}</span>  
+						<span className='detail-list-item-right'>
+							<span className='number'>x{item.number}</span><span className="price">&yen;{item.price}</span>
+						</span>
+					</dd>)
+			}
+		});
+
+		
+
 		return(
 			<div style={{paddingBottom:'.3rem'}}>
 				<dl className = 'detail-list'>
-					<dt className='detail-list-head'>57加盟店酱料订单</dt>
-					<dd className='detail-list-item'> 
-						<span className='detail-list-item-left'>酱辣子（12333）</span>  
-						<span className='detail-list-item-right'>
-							<span className='number'>x1</span><span className="price">&yen;280/箱</span>
-						</span>
-					</dd>
-					<dd className='detail-list-item'> 
-						<span className='detail-list-item-left'>酱辣子（12333）</span>  
-						<span className='detail-list-item-right'>
-							<span className='number'>x1</span><span className="price">&yen;280/箱</span>
-						</span>
-					</dd>
-					<dd className='detail-list-item'> 
-						<span className='detail-list-item-left'>酱辣子（12333）</span>  
-						<span className='detail-list-item-right'>
-							<span className='number'>x1</span><span className="price">&yen;280/箱</span>
-						</span>
-					</dd>
-					<dd className='detail-list-item'> 
-						<span className='detail-list-item-left'>酱辣子（12333）</span>  
-						<span className='detail-list-item-right'>
-							<span className='number'>x1</span><span className="price">&yen;280/箱</span>
-						</span>
-					</dd>
-					<dt className='detail-list-head tr'>合计：<span className='price'>&yen;285</span></dt>
+					<dt className='detail-list-head'>{data.order.name}</dt>
+						{items}
+					<dt className='detail-list-head tr'>合计：<span className='price'>&yen;{data.price}</span></dt>
 				</dl>
 
 				<dl className = 'detail-list'>
@@ -50,33 +42,24 @@ class Submit extends Component{
 					</dd>
 					<dd className='detail-list-item'> 
 						<span className='detail-list-item-left'>收货人：</span>  
-						<span className='detail-list-item-right'>
-							施威
-						</span>
+						<input className='detail-list-item-right' placeholder='请输入收货人' />
+							
 					</dd>
 					<dd className='detail-list-item'> 
 						<span className='detail-list-item-left'>制单人：</span>  
-						<span className='detail-list-item-right'>
-							施威
-						</span>
+						<input className='detail-list-item-right'  placeholder='请输入制单人'  />
 					</dd>
 					<dd className='detail-list-item'> 
 						<span className='detail-list-item-left'>门店电话：</span>  
-						<span className='detail-list-item-right'>
-							13410960094
-						</span>
+						<input className='detail-list-item-right'  placeholder='请输入门店电话'  />
 					</dd>
 					<dd className='detail-list-item'> 
 						<span className='detail-list-item-left'>授权审核人：</span>  
-						<span className='detail-list-item-right'>
-							哈哈
-						</span>
+						<input className='detail-list-item-right'  placeholder='请输入授权审核人'  />
 					</dd>
 					<dd className='detail-list-item'> 
 						<span className='detail-list-item-left'>审核日期：</span>  
-						<span className='detail-list-item-right'>
-							2017/06/11
-						</span>
+						<span className='detail-list-item-right'></span>
 					</dd>
 				</dl>
 

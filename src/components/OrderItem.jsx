@@ -14,8 +14,8 @@ export default class OrderItem extends Component{
 					<p><span className='ordered-item-number'>订单号：40021545</span></p>
 				</div>
 				<div className='ordered-item-footer'>
-					<Link className='btn btn-ghost btn-primary'>订单详情</Link>
-					<span className='btn btn-ghost btn-dangerous'>删除订单</span>
+					<Link className='btn btn-ghost btn-primary' to='/order/detail/1'>订单详情</Link>
+					<span className='btn btn-ghost btn-dangerous' onClick={this.onClick}>删除订单</span>
 				</div>
 			</div>
 		);

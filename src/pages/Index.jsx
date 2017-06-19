@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import Head from 'component/Head'
-import * as actions from 'action/index';
+import * as actions from 'action/Index';
 import ReactCSSTransitionGroup from "react-addons-css-transition-group" ;
 import SideMenu from 'component/SideMenu';
 import {Tips} from 'component/Alert';

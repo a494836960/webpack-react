@@ -17,6 +17,22 @@ import {Link} from 'react-router';
  	componentWillMount(){
  		this.props.dispatch(actions.setHead({isHome:true}));
  		this.props.dispatch(actions.getHome());
+
+ 		this.state.bannerList = [
+			{
+				url:null,
+				banner: require('img/brand/banner.png')
+			},
+			{
+				url:null,
+				banner: require('img/brand/banner.png')
+			}
+			,{
+				url:null,
+				banner: require('img/brand/banner.png')
+			}
+		];
+
  	}
 
  	componentDidMount(){
@@ -70,7 +86,7 @@ import {Link} from 'react-router';
 		return(
 			<div>
 				<div>
-					<Banner list={this.props.banner}/>
+					<Banner list={this.state.bannerList}/>
 				</div>
 				<div>{sectionHtml}
 					{/*资质荣誉*/}

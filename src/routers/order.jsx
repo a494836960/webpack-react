@@ -1,3 +1,4 @@
+import tools from 'verdor/tools'
 module.exports = {
 	path:'order',
 
@@ -8,7 +9,13 @@ module.exports = {
 			},'order')
 		}
 	},
-
+	onEnter: (_, replaceState) => {
+		let user = tools.SS.getItem('user');
+		
+		//if(!(user.lastTime && new Date() - user.lastTiem <= 3600 * 24 * 1000 && !user.isLogin)){
+		//	replaceState('/user');
+		//}		
+	},
 	getChildRoutes(location,cb){
 		require.ensure([],require=>{
 			cb(null,[

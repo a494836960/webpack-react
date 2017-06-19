@@ -20,7 +20,7 @@ class Index extends Component{
 
 	componentDidMount(){
 		let banner = [{
-			banner: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg',
+			banner: require('img/index/development.png'),
 			url: null
 		}];
 

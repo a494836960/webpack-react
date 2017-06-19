@@ -21,7 +21,8 @@ class Add extends Component{
 							model:'2.5KG/袋*4袋/箱',
 							price: '567.40/箱',
 							expired:'1年',
-							number: 0
+							number: 0,
+							money: 567.40
 						},
 						{
 							id:'102',
@@ -29,7 +30,8 @@ class Add extends Component{
 							model:'2.5KG/袋*4袋/箱',
 							price: '567.40/箱',
 							expired:'1年',
-							number: 0
+							number: 0,
+							money: 567.40
 						},
 						{
 							id:'103',
@@ -37,7 +39,8 @@ class Add extends Component{
 							model:'2.5KG/袋*4袋/箱',
 							price: '567.40/箱',
 							expired:'1年',
-							number: 0
+							number: 0,
+							money: 567.40
 						}
 					]
 				},
@@ -50,7 +53,8 @@ class Add extends Component{
 							model:'2.5KG/袋*4袋/箱',
 							price: '567.40/箱',
 							expired:'1年',
-							number: 0
+							number: 0,
+							money: 567.40
 						},
 						{
 							id:'202',
@@ -58,7 +62,8 @@ class Add extends Component{
 							model:'2.5KG/袋*4袋/箱',
 							price: '567.40/箱',
 							expired:'1年',
-							number: 0
+							number: 0,
+							money: 567.40
 						},
 						{
 							id:'203',
@@ -66,7 +71,8 @@ class Add extends Component{
 							model:'2.5KG/袋*4袋/箱',
 							price: '567.40/箱',
 							expired:'1年',
-							number: 0
+							number: 0,
+							money: 567.40
 						}
 					]
 				}
@@ -84,22 +90,33 @@ class Add extends Component{
 
 	/*提交订单*/
 	handleSubmit(){
-		console.log(this.state);
-		return;
-		this.props.router.push('/order/submit');
+		let order = this.state.order[this.state.currIndex];
+		let price = 0;
+		order.subList.map((item,index)=>{
+			price+=item.money*item.number;
+		});
+		
+		price = price.toFixed(2);
+		this.props.router.push({
+			pathname:'/order/submit',
+			state:{
+				price: price,
+				order: order
+			}
+		});
 	}
 
 	switchLeft(index){
 		this.setState({
 			currIndex: index
-		})
+		});
 	}
 
 	render(){
 		let leftList = [];
 		let rightList = [];
 		this.state.order.map((item,index)=>{
-			leftList.push(<li key={index} className={`${this.state.currIndex == index ? 'active' : ''} item`} onClick={this.switchLeft.bind(this,index)}>57加盟店酱料订单</li>);
+			leftList.push(<li key={index} className={`${this.state.currIndex == index ? 'active' : ''} item`} onClick={this.switchLeft.bind(this,index)}>{item.name}</li>);
 
 			if(this.state.currIndex == index){
 				item.subList.map((item,index)=>{

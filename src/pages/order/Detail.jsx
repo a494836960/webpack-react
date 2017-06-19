@@ -21,7 +21,7 @@ class Detail extends Component{
 						</div>
 					</div>
 					<div className='order-info-footer'>	
-						<span className='order-number'> <i className='iconfont'>&#xe622;</i> 订单号：6546465465</span> <span>正在审核</span>
+						<span className='order-number'> <i className='iconfont'>&#xe622;</i> 订单号：6546465465</span> <span style={{color:'#555'}}>正在审核</span>
 					</div>
 				</div>
 				<dl className = 'detail-list'>

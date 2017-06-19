@@ -1,5 +1,6 @@
+import tools from 'verdor/tools'
 import {combineReducers} from 'redux'
-import * as actions from 'action/index';
+import * as actions from 'action/Index';
 
 function setHead (state={title:'首页',isHome: false}, action){
 	switch(action.type){
@@ -47,12 +48,14 @@ function user (state={isLogin: false},action){
 					isLogin: false
 				};
 			}
+			action.user.lastTime = +new Date();
+			tools.SS.setItem('user',action.user);
 
 			return Object.assign({},state,action.user);
 		break;
 
 		case actions.GET_USER:
-			
+			return action.user;
 		break;
 
 		default: 
