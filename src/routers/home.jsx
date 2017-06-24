@@ -30,7 +30,7 @@ module.exports = {
 						},'home')
 					}
 				},{
-					path: 'about',
+					path: 'about/:id',
 					getComponents(location,cb){
 						require.ensure([],require=>{
 							console.log('Index')

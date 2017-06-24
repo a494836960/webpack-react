@@ -65,13 +65,19 @@ function user (state={isLogin: false},action){
 }
 
 
-function home (state={banner:[]}, action){
+function home (state={banner:[],invalid:true}, action){
 	switch(action.type){
-		case actions.GET_HOME:
-		return Object.assign({},state,action.home);
+
+		case actions.RECEIVE_HOME:
+			action.home.invalid = false;
+			action.home.fetching = false;
+			return Object.assign({},state,action.home);
+
+		case actions.REQUEST_HOME:
+
+			return {fetching : true};
 
 		default :
-
 		return state;
 	}
 }
@@ -88,10 +94,58 @@ function showTip (state={txt:''},action){
 	}
 }
 
+function friendLinks(state={invalid: true,list:[]},action){
+	switch(action.type){
+		case actions.REQUEST_FL:
+
+		return {fetching: false};
+
+		case actions.RECEIVE_FL:
+			action.friendLinks.isFetching = false;
+			action.friendLinks.invalid = false;
+		return Object.assign({},state,action.friendLinks);
+		default:
+		return state;
+	}
+}
+
+function brand(state={invalid: true,list:[]},action){
+	switch(action.type){
+		case actions.REQUEST_BRAND:
+
+		return {fetching: false};
+
+		case actions.RECEIVE_BRAND:
+			action.brand.isFetching = false;
+			action.brand.invalid = false;
+		return Object.assign({},state,action.brand);
+		default:
+		return state;
+	}
+}
+
+function intro(state={invalid: true,list:[]},action){
+	switch(action.type){
+		case actions.REQUEST_INTRO:
+
+		return {fetching: false};
+
+		case actions.RECEIVE_INTRO:
+			action.intro.isFetching = false;
+			action.intro.invalid = false;
+		return Object.assign({},state,action.intro);
+		default:
+		return state;
+	}
+}
+
 export default combineReducers({
 	toggleMenu,
 	setHead,
 	user,
 	home,
-	showTip
+	showTip,
+	friendLinks,
+	intro,
+	brand
 })

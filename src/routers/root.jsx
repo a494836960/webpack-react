@@ -22,6 +22,7 @@ module.exports = {
 				require('./user.jsx'),	//登录注册之类
 				require('./join.jsx'), //在线加盟
 				require('./home.jsx'),
+				require('./recruitment.jsx'),
 				{
 					path:'notFind',
 					getComponents(location,cb){

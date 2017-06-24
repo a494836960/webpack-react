@@ -13,16 +13,16 @@ class Detail extends Component{
 	}
 
 	componentWillMount(){
-		this.props.dispatch(actions.setHead({title:'旗下品牌'}));
+		this.props.dispatch(actions.setHead({title:'活动详情'}));
 	}
 
 	componentDidMount(){
 		tools.fetch({
-			url:'/protal/mobile/brandDetail?id='+this.props.params.id,
+			url:'/protal/mobile/activeDetail?id='+this.props.params.id,
 			method: 'GET'
 		}).then(response=>{
 			this.setState({
-				articleContent: response.brand.introduction
+				articleContent: response.article.content
 			})
 		});
 		

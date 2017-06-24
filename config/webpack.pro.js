@@ -17,6 +17,6 @@ let plugins = [
         }
     })
 ];
-base.output.publicPath='/57/resources/protal/mobile/';
+base.output.publicPath='/resources/protal/mobile/';
 base.plugins.push(...plugins);
 module.exports = base;

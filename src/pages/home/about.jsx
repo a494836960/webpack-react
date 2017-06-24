@@ -1,42 +1,52 @@
- import React,{Component} from 'react';
+import React,{Component} from 'react';
+import tools from 'verdor/tools';
 import {connect} from 'react-redux';
-import * as actions from 'action/Index'
-import Banner from 'component/Banner'
-import ArticleDetail from 'component/ArticleDetail'
+import * as actions from 'action/Index';
+
 class About extends Component{
-	
 	constructor(props){
 		super(props);
 		this.state={
-			banner: []
+			articleContent: ''
 		}
 	}
 
 	componentWillMount(){
-		this.props.dispatch(actions.setHead({title: '研发团队'}))
+		this.props.dispatch(actions.setHead({title:" "}));
 	}
 
-
 	componentDidMount(){
-		let banner = [{
-			banner: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg',
-			url: null
-		}];
-
-		this.setState({
-			banner: banner
-		})
+		this.props.dispatch(actions.getIntro());		
 	}
 
 	render(){
-
+		let index = this.props.params.id;
+		let intro = this.props.intros[index];
+		if(!intro){
+			return null;
+		}
 		return (
-			<div>
-				<Banner list={this.state.banner}/>
-				<ArticleDetail articleContent={<p>ffff</p>}/>
+			<div className='article'>
+				<header className='article-head'>
+					<h1 className='article-title'>{intro.title}</h1>
+					<div className='article-intro'>
+						<span className='article-intro-date'>
+							时间：{tools.formatterDate(intro.createDate)}
+						</span>
+					</div>
+				</header>
+				<div className='article-body' dangerouslySetInnerHTML={{__html: intro.content}}>
+					 
+				</div>
 			</div>
 		);
 	}
 }
+function selector(state){
+	console.log(state)
+	return {
+		intros: state.intro.list
+	}
+}
 
-export default connect()(About);
+export default connect(selector)(About);

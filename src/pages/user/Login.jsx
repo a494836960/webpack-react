@@ -15,6 +15,15 @@ class Login extends Component{
 
 	componentWillMount(){
 		this.props.dispatch(actions.setHead({title:'登录',hasRight:false}));
+
+		this.state.errorCode = {
+			C1000: '操作失败',
+			C1001: '操作成功',
+			C1002: '参数错误',
+			C1003: '账号或密码错误',
+			C1004: '账号已锁定',
+			C1005: '账号已停用',
+		}
 	}
 
 	handleChange(e){
@@ -37,8 +46,14 @@ class Login extends Component{
 			return;
 		}
 		
-		tools.fetch({}).then(()=>{
-			if(true){
+		tools.fetch({
+			url:'/protal/mobile/login',
+			data:{
+				mobile: this.state.username,
+				password: this.state.password
+			}
+		}).then((json)=>{
+			if(json.code != 'C1001'){
 				let from =this.props.location.query.from;
 				if(!from){
 					from='home'
@@ -47,9 +62,10 @@ class Login extends Component{
 				this.props.router.replace({
 					pathname: from
 				})
+			} else {
+				dispatch(actions.showTips({txt:this.state.errorCode[json.code]}));
 			}
 		});
-
 	}
 
 	render(){
@@ -59,17 +75,13 @@ class Login extends Component{
 				<div>
 					<div className='wrap-input'>
 						<i className='iconfont'>&#xe653;</i>
-						<input type='text' className='input' name='username' placeholder='请输入用户名' value={this.state.username || ''} onChange={this.handleChange.bind(this)}/>
+						<input type='tel' className='input' name='username' placeholder='请输入用户名' value={this.state.username || ''} onChange={this.handleChange.bind(this)}/>
 					</div>
 					<div className='wrap-input'>
 						<i className='iconfont'>&#xe607;</i>
-						<input type='text' className='input' name='password' placeholder='请输入用户名' value={this.state.password || ''} onChange={this.handleChange.bind(this)} />
+						<input type='password' className='input' name='password' placeholder='请输入用户名' value={this.state.password || ''} onChange={this.handleChange.bind(this)} />
 					</div>
 					
-					<div style={{margin:'.2rem .6rem'}}>
-						<Link className='fr' to='/user/forgetPassword'>忘记密码？</Link>
-					</div>
-
 					<div className='' style={{margin:'.2rem'}}>
 						<div className='btn btn-block btn-primary mt3' onClick={this.handleSubmit.bind(this)}>登录</div>
 					</div>

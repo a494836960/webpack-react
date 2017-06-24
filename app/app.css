@@ -674,7 +674,7 @@ html, body, #container, #container > div {
 
 /*招商加盟*/
 .join-head.head {
-  background: url(/57/resources/protal/mobile/images/4ccdb3fa.nav-bg.png) no-repeat;
+  background: url(/resources/protal/mobile/images/4ccdb3fa.nav-bg.png) no-repeat;
   background-size: cover; }
   .join-head.head .back {
     color: #fff; }
@@ -1197,8 +1197,8 @@ input[type=radio]:checked {
     opacity: 0; }
 @font-face {
   font-family: 'iconfont';
-  src: url(/57/resources/protal/mobile/images/a5532f5b.iconfont.eot);
-  src: url(/57/resources/protal/mobile/images/a5532f5b.iconfont.eot?#iefix) format("embedded-opentype"), url(/57/resources/protal/mobile/images/7101c3c8.iconfont.woff) format("woff"), url(/57/resources/protal/mobile/images/52f1c9f8.iconfont.ttf) format("truetype"), url(/57/resources/protal/mobile/images/3173d6d0.iconfont.svg#iconfont) format("svg"); }
+  src: url(/resources/protal/mobile/images/a5532f5b.iconfont.eot);
+  src: url(/resources/protal/mobile/images/a5532f5b.iconfont.eot?#iefix) format("embedded-opentype"), url(/resources/protal/mobile/images/7101c3c8.iconfont.woff) format("woff"), url(/resources/protal/mobile/images/52f1c9f8.iconfont.ttf) format("truetype"), url(/resources/protal/mobile/images/3173d6d0.iconfont.svg#iconfont) format("svg"); }
 
 .iconfont {
   font-family: iconfont;

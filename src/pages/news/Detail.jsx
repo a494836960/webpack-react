@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
+import tools from 'verdor/tools';
+import {connect} from 'react-redux';
+import * as actions from 'action/Index';
 
-export default class Detail extends Component{
+class Detail extends Component{
 	constructor(props){
 		super(props);
 		this.state={
@@ -8,25 +11,33 @@ export default class Detail extends Component{
 		}
 	}
 
+	componentWillMount(){
+		this.props.dispatch(actions.setHead({title:" "}));
+	}
+
 	componentDidMount(){
-		this.setState({
-			articleContent: "<p>balabalabalabala.......</p><p>balalababalalaba....</p>"
-		})
+		tools.fetch({
+			url:'/protal/mobile/activeDetail?id='+this.props.params.id,
+			method: 'GET'
+		}).then(response=>{
+			this.setState({
+				articleContent: response.article.content,
+				title:  response.article.title,
+				date: response.article.createDate
+			})
+		});
+		
 	}
 
 	render(){
-		console.log(this.state.articleContent)
 
 		return (
 			<div className='article'>
 				<header className='article-head'>
-					<h1 className='article-title'>好吃最终页</h1>
+					<h1 className='article-title'>{this.state.title}</h1>
 					<div className='article-intro'>
 						<span className='article-intro-date'>
-							时间：2017-06-02 15:33:39
-						</span>
-						<span className='article-intro-origin'>
-							文章来源：57度湘
+							时间：{tools.formatterDate(this.state.date)}
 						</span>
 					</div>
 				</header>
@@ -37,3 +48,5 @@ export default class Detail extends Component{
 		);
 	}
 }
+
+export default connect()(Detail);

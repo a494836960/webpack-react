@@ -16,44 +16,26 @@ class Index extends Component{
 	componentDidMount(){
 
 		this.props.dispatch(actions.setHead({title:'旗下品牌'}));
-
+		this.props.dispatch(actions.getBrand());
 		this.state.bannerList = [
 			{
 				url:null,
 				banner: require('img/brand/banner.png')
 			}
 		];
-
-		this.state.brandList=[
-			{
-				id:'1',
-				name:'小猪猪',
-				pic:require('img/brand/1.png')
-			},
-			{
-				id:'2',
-				name:'小猪猪',
-				pic:require('img/brand/2.png')
-			},
-			{
-				id:'3',
-				name:'小猪猪',
-				pic:require('img/brand/3.png')
-			},{
-				id:'4',
-				name:'小猪猪',
-				pic:require('img/brand/4.png')
-			}
-		]
-
-		this.setState({});	
+		this.setState({});
 	}
+
+	goDetail(id){
+		this.props.router.push(`/brand/detail/${id}`)
+	}
+
 
 	render(){
 		let brandList = [];
-		this.state.brandList.map((item, index)=>{
-			brandList.push(<div className='brand-item' key = {index}>
-				<img className='brand-item-pic' src={item.pic}/>
+		this.props.subBrands.map((item, index)=>{
+			brandList.push(<div className='brand-item' key = {index} onClick={this.goDetail.bind(this,item.id)}>
+				<img className='brand-item-pic' src={item.logo}/>
 				<p className='brand-item-name'>{item.name}</p>
 			</div>)
 		})
@@ -69,4 +51,11 @@ class Index extends Component{
 	}
 }
 
-export default connect()(Index)
+function selector(state){
+	console.log(state)
+	return {
+		subBrands: state.brand.list
+	}
+}
+
+export default connect(selector)(Index)

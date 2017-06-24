@@ -19,51 +19,57 @@ class Index extends Component{
 
 	componentWillMount(){
         this.props.dispatch(actions.toggleMenu(false));
+        this.props.dispatch(actions.getUser());
         this.state.navList = [
             {
                 id:'1',
                 url:'',
                 name: '57介绍',
-                icon:require('img/index/home-active.png'),
+                icon:'&#xe657',
                 active: true
             },{
                 id:'2',
                 url:'/brand',
                 name: '旗下品牌',
-                icon:require('img/index/brand.png')
+                icon:'&#xe628;'
             },{
                 id:'3',
                 url:'/join',
                 name: '在线加盟',
-                icon:require('img/index/join.png')
+                icon:'&#xe600;'
             },{
                 id:'4',
                 url:'/order',
                 name: '提交订单',
-                icon:require('img/index/submit-order.png')
+                icon:'&#xe656;'
             },{
                 id:'5',
                 url:'/order/search',
                 name: '订单查询',
-                icon:require('img/index/order-search.png')
+                icon:'&#xe61e;'
             },{
                 id:'6',
                 url:'/activity',
                 name: '品牌活动',
-                icon:require('img/index/activity.png')
+                icon:'&#xe64e;'
             },{
                 id:'7',
                 url:'/news',
                 name: '资讯动态',
-                icon:require('img/index/order-search.png')
+                icon:'&#xe62a;'
             },{
                 id:'8',
+                url:'/recruitment',
+                name: '人才招聘',
+                icon:'&#xe6d1;'
+            },{
+                id:'9',
                 url:'/user',
                 name: '退出登入',
-                icon:require('img/index/join.png'),
+                icon:'&#xe663;',
                 onClick:(props,url)=>{
                     if(props.user.isLogin){ //如果是登陆状态
-                        tools.fetch().then(response=>{
+                        tools.fetch({url:'/protal/mobile/logout',method:"get"}).then(response=>{
                             props.dispatch(actions.setUser({isLogin: false}));
                             props.router.push(url);
                             props.dispatch(actions.toggleMenu(false));
@@ -92,7 +98,8 @@ class Index extends Component{
         let navListHtml =[];
         this.state.navList.map((item,index)=>{
             navListHtml.push(<dd className={`${item.active ?'active' : ''} menu-item`} key={index} >
-                <div className='menu-body' style={{'backgroundImage':`url(${item.icon})`}} onClick={this.forward.bind(this,item.url,item.onClick)}>
+                <div className='menu-body' onClick={this.forward.bind(this,item.url,item.onClick)}>
+                <i className='iconfont' dangerouslySetInnerHTML={{__html: item.icon}}></i>
                     <span>{item.name}</span>
                 </div>
             </dd>)

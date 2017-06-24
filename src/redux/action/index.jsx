@@ -26,23 +26,18 @@ export function showTips(txt){
 export function getUser(){
 
 	return function (dispath){
-		let user = SS.getItem('user');
-		if(user.lastTime && new Date() - user.lastTiem <= 3600 * 24 * 1000){
+		let user = tools.SS.getItem('user');
+		if(user.lastTime && new Date() - user.lastTime <= 3600 * 24 * 1000){
 			dispath({
 					type: GET_USER,
 					user
 				})
 		} else {
-			return tools.fetch().then(response=>{
-				response.lastTime = +new Date();
-				response.isLogin = true;
-				tools.SS.setItem('user', response);
-				dispath({
-					type: GET_USER,
-					user:{
-						response
-					}
-				})
+			dispath({
+				type: GET_USER,
+				user:{
+					isLogin:false
+				}
 			})
 		}
 	}
@@ -57,35 +52,188 @@ export function setUser(user){
 * 获取首页的数据
 */
 
+export const REQUEST_HOME = 'REQUEST_HOME';
+export const RECEIVE_HOME = 'RECEIVE_HOME';
 export function getHome(){
-	return function (dispath,getState){
+	return function (dispatch,getState){
 		let state = getState();
-		if(state.home.banner.length != 0){//home 页面只有空才不请求数据
-			dispath({
-				type: GET_HOME,
-				home:state
-			})
+		if(!state.home.invalid){//home 页面只有空才不请求数据
+			dispatch(receiveHome(state.home.banner));
 		}else{
-			return tools.fetch({
-				url:'/mobile/indexAds',
-				method: 'get'
-				}).then(response=>{
-					//TODO 处理后台来的数据
-					let banners = []; 
-					response.map((item,index)=>{
-						banners.push({
-							banner: item.path
-						});
-					})
-
-					dispath({
-						type: GET_HOME,
-						home:{
-							banner:banners
-						}
-					})
-			})
+			dispatch(FetchingHome());
 		}
 	}
 }
 
+function requestHome(){
+	return dispatch=>{
+		dispatch({
+			type: REQUEST_HOME,
+			home:{
+				isFetching: true
+			}
+		});
+	}
+}
+
+
+function FetchingHome(){
+	return dispatch=>{
+			tools.fetch({
+			url:'/protal/mobile/indexAds',
+			method: 'get'
+		}).then(response=>{
+			let banners = []; 
+			response.map((item,index)=>{
+				banners.push({
+					banner: item.path
+				});
+			});
+			dispatch(receiveHome(banners))
+		})
+	}
+}
+
+function receiveHome(banners){
+	return {
+		type: RECEIVE_HOME,
+		home:{
+			banner:banners
+		}
+	}
+}
+
+
+//首页introduce
+
+export const REQUEST_INTRO = 'REQUEST_INTRO';
+export const RECEIVE_INTRO = 'RECEIVE_INTRO';
+export function getIntro(){
+	return function (dispatch,getState){
+		let state = getState();
+		console.log(state.intro.invalid,'============')
+		if(!state.intro.invalid){//home 页面只有空才不请求数据
+			dispatch(receiveIntro(state.intro.list));
+		}else{
+			dispatch(FetchingIntro());
+		}
+	}
+}
+
+function requestIntro(){
+	return dispatch=>{
+		dispatch({
+			type: REQUEST_INTRO,
+			intro:{
+				isFetching: true
+			}
+		});
+	}
+}
+
+
+function FetchingIntro(){
+	return dispatch=>{
+			tools.fetch({
+			url:'/protal/mobile/introduce',
+			method: 'get'
+		}).then(response=>{
+			 
+			dispatch(receiveIntro(response.articles))
+		})
+	}
+}
+
+function receiveIntro(data){
+	return {
+		type: RECEIVE_INTRO,
+		intro:{
+			list:data
+		}
+	}
+}
+
+
+
+// 获取友情链接
+export const REQUEST_FL = 'REQUEST_FL';
+export const RECEIVE_FL = 'RECEIVE_FL';
+export function getFriendLinks(){
+	return (dispatch,getState)=>{
+		let state = getState();
+		if(!state.friendLinks.invalid){
+			dispatch(receiveFriendLinks(state.friendLinks.list))
+		}else{
+			dispatch(fetchingFriendLinks());
+		}
+	}
+}
+
+function fetchingFriendLinks(){
+	return dispatch=>{
+		tools.fetch({
+			url:'/protal/mobile/friendLinks',
+			method: 'GET'
+		}).then(response=>{
+			dispatch(receiveFriendLinks(response.friendLinks));
+		});
+	}
+}
+
+function requestFriendLinks(){
+	return {
+		type: REQUEST_FL,
+		friendLinks:{
+			isFetching: true
+		}
+	}
+}
+
+function receiveFriendLinks(data){
+	return {
+		type: RECEIVE_FL,
+		friendLinks:{list: data}
+	}
+}
+
+
+// 获取子品牌
+export const REQUEST_BRAND = 'REQUEST_BRAND';
+export const RECEIVE_BRAND = 'RECEIVE_BRAND';
+export function getBrand(){
+	return (dispatch,getState)=>{
+		let state = getState();
+		if(!state.brand.invalid){
+			dispatch(receiveBrand(state.brand.list))
+		}else{
+			dispatch(fetchingBrand());
+		}
+	}
+}
+
+function fetchingBrand(){
+	return dispatch=>{
+		tools.fetch({
+			url:'/protal/mobile/brands',
+			method: 'GET'
+		}).then(response=>{
+			dispatch(receiveBrand(response.brands));
+		});
+	}
+}
+
+function requestBrand(){
+	return {
+		type: REQUEST_BRAND,
+		brand:{
+			isFetching: true
+		}
+	}
+}
+
+function receiveBrand(data){
+	return {
+		type: RECEIVE_BRAND,
+		brand:{list: data}
+	}
+}

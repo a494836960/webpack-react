@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Banner from 'component/Banner.jsx';
+import tools from 'verdor/tools';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from 'action/Index'
@@ -8,32 +9,50 @@ class Index extends Component{
 	constructor(props){
 		super(props);
 		this.state={
-			bannerList: []
+			bannerList: [],
+			actives:[]
 		}
+	}
+
+	componentWillMount(){
+		this.props.dispatch(actions.setHead({title:'品牌活动'}));
+		this.state.bannerList = [
+			{
+				url:null,
+				banner:require('img/activity/banner.png')
+			}
+		]
 	}
 
 	componentDidMount(){
 
-		this.props.dispatch(actions.setHead({title:'品牌活动'}));
+		tools.fetch({
+			url:'/protal/mobile/active',
+			method: 'GET'
+		}).then(response=>{
+			this.setState({
+				actives: response.actives
+			})
+		});
+	}
 
-		this.state.bannerList = [
-			{
-				url:null,
-				banner:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=102656704,3745576430&fm=117&gp=0.jpg'
-			}
-		];
-		this.setState({});	
+	goActive(id){
+		this.props.router.push(`/news/detail/${id}`);
 	}
 
 	render(){
+		let activesHtml = [];
+		this.state.actives.map((item,index)=>{
+			activesHtml.push(<Link key={index} onClick={this.goActive.bind(this,item.id)}>
+								<img src={item.icon}/>
+							</Link>);
+		})
 
 		return (
 			<div>
 				<Banner list = {this.state.bannerList}/>
 				<div className='activity-item'>
-					<Link>
-						<img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=102656704,3745576430&fm=117&gp=0.jpg"/>
-					</Link>
+					{activesHtml}
 				</div>
 			</div>
 		);

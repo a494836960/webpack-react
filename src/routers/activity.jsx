@@ -13,7 +13,14 @@ module.exports = {
 	getChildRoutes(location,cb){
 		require.ensure([],require=>{
 			cb(null,[
-				
+				{
+					path:'detail/:id',
+					getComponents(location, cb){
+						require.ensure([],require=>{
+							cb(null, require('page/activity/Detail').default)
+						},'activity')
+					}
+				}
 			])
 		})
 	}
