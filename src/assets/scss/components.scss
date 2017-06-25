@@ -192,6 +192,11 @@
 	.news-item-summary{
 		color: #7D7D7D;
 		font-size: .24rem;
+	    display: -webkit-box;
+	    -webkit-box-orient: vertical;
+	    -webkit-line-clamp: 2;
+	    overflow: hidden;
+	    margin-top: .1rem;
 	}
 	.news-item-date{
 		color: #848484;
@@ -285,4 +290,32 @@
 	&.tips-hidden{
 		opacity: 0;
 	}
+}
+
+/* 加载中 */
+.loading{
+	position: absolute;
+	top:0;
+	left: 0;
+	width:100%;
+	height: 100%;
+	text-align: center;
+	img{
+		margin-top: 1.2rem;
+	    animation: rotate360 1s linear;
+	    width: 1.5rem;
+	    animation-iteration-count: infinite;
+	}
+}
+
+@keyframes rotate360
+{
+from {transform:rotate(0deg);}
+to {transform:rotate(360deg);}
+}
+
+@-webkit-keyframes rotate360 /* Safari 和 Chrome */
+{
+from {transform:rotate(0deg);}
+to {transform:rotate(360deg);}
 }

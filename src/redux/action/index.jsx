@@ -237,3 +237,208 @@ function receiveBrand(data){
 		brand:{list: data}
 	}
 }
+
+//新闻
+export const REQUEST_NEWS = 'REQUEST_NEWS';
+export const RECEIVE_NEWS = 'RECEIVE_NEWS';
+export function getNews(pages){
+	return (dispatch,getState)=>{
+		let state = getState();
+		if(!state.news.invalid && (!pages || state.news.noMore)){
+			dispatch(receiveNews(state.news))
+		}else{
+			if(!pages){
+				dispatch(requestNews());
+			}
+			dispatch(fetchingNews());
+		}
+	}
+}
+
+function fetchingNews(){
+	return (dispatch,getState)=>{
+		let state = getState();
+		let list = state.myOrder.list;
+
+		tools.fetch({
+			url:'/protal/mobile/articles',
+			method: 'GET'
+		}).then(response=>{
+			let data = {
+				pageSize: response.pageSize,
+				pageNumber: response.pageNumber,
+				total: response.total
+			}
+			list.push(...response.articles)
+			data.list = list;
+
+			if(response.pageSize > response.articles.length){
+				data.noMore = true;
+			}
+
+			dispatch(receiveNews(data));
+		});
+	}
+}
+
+function requestNews(){
+	return {
+		type: REQUEST_NEWS,
+		news:{
+			isFetching: true
+		}
+	}
+}
+
+function receiveNews (data){
+	return {
+		type: RECEIVE_NEWS,
+		news:data
+	}
+}
+
+//新闻Banner
+export const REQUEST_NEWSAD = 'REQUEST_NEWSAD';
+export const RECEIVE_NEWSAD = 'RECEIVE_NEWSAD';
+export function getNewsAd(){
+	return (dispatch,getState)=>{
+		let state = getState();
+		if(!state.newsAd.invalid){
+			dispatch(receiveNewsAd(state.newsAd.list))
+		}else{
+			dispatch(fetchingNewsAd());
+		}
+	}
+}
+
+function fetchingNewsAd(){
+	return dispatch=>{
+		tools.fetch({
+			url:'/protal/mobile/articleAds',
+			method: 'GET'
+		}).then(response=>{
+			let banners = [];
+			response.ads.map((item,index)=>{
+				banners.push({
+					banner:item.path
+				})
+			})
+			dispatch(receiveNewsAd (banners));
+		});
+	}
+}
+
+function requestNewsAd(){
+	return {
+		type: REQUEST_NEWSAD,
+		newsAd:{
+			isFetching: true
+		}
+	}
+}
+
+function receiveNewsAd (data){
+	return {
+		type: RECEIVE_NEWSAD,
+		newsAd:{list: data}
+	}
+}
+
+//我的订单查询
+export const REQUEST_MYORDER= 'REQUEST_MYORDER';
+export const RECEIVE_MYORDER = 'RECEIVE_MYORDER';
+export function getMyOrder(pages){
+	return (dispatch,getState)=>{
+		let state = getState();
+		if(!state.myOrder.invalid && (!pages || state.myOrder.noMore)){
+			dispatch(receiveMyOrder(state.myOrder));
+		}else{
+			if(!pages){
+				dispatch(requestMyOrder());
+			}
+			dispatch(fetchingMyOrder());
+		}
+	}
+}
+
+function fetchingMyOrder(){
+	return (dispatch,getState)=>{
+		let state = getState();
+		let list = state.myOrder.list;
+		tools.fetch({
+			url:'/protal/mobile/orders?pageNumber='+ (Number(state.myOrder.pageNumber)+1),
+			method: 'GET'
+		}).then(response=>{
+
+			let data = {
+				pageSize: response.pageSize,
+				pageNumber: response.pageNumber,
+				total: response.total
+			}
+			list.push(...response.brandMaterielOrder)
+			data.list = list;
+			if(response.pageSize > response.brandMaterielOrder.length){
+				data.noMore = true;
+			}
+			dispatch(receiveMyOrder(data));
+		});
+	}
+}
+
+function requestMyOrder(){
+	return {
+		type: REQUEST_MYORDER,
+		myOrder:{
+			isFetching: true
+		}
+	}
+}
+
+function receiveMyOrder (data){
+	return {
+		type: RECEIVE_MYORDER,
+		myOrder:data
+	}
+}
+
+//获取已经加盟品牌Brand
+export const REQUEST_ALL_BRANDS= 'REQUEST_ALL_BRANDS';
+export const RECEIVE_ALL_BRANDS = 'RECEIVE_ALL_BRANDS';
+export function getAllBrands(){
+	return (dispatch,getState)=>{
+		let state = getState();
+		if(!state.allBrands.invalid){
+			dispatch(receiveAllBrands(state.allBrands.data));
+		}else{
+			dispatch(requestAllBrands());
+			dispatch(fetchingAllBrands());
+		}
+	}
+}
+
+function fetchingAllBrands(){
+	return dispatch=>{
+		tools.fetch({
+			url:'/protal/mobile/allyBrands',
+			method: 'GET'
+		}).then(response=>{
+			dispatch(receiveAllBrands ({brands:response.brands,type:response.type}));
+		});
+	}
+}
+
+function requestAllBrands(){
+	return {
+		type: REQUEST_ALL_BRANDS,
+		allBrands:{
+			isFetching: true
+		}
+	}
+}
+
+function receiveAllBrands (data){
+	return {
+		type: RECEIVE_ALL_BRANDS,
+		allBrands:{data: data}
+	}
+}

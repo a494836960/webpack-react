@@ -2,8 +2,9 @@ import React,{Component} from 'react';
 import Banner from 'component/Banner';
 import {connect} from 'react-redux';
 import * as actions from 'action/Index';
-import GoodsItem from 'component/GoodsItem'
-
+import GoodsItem from 'component/GoodsItem';
+import tools from 'verdor/tools';
+import Loading from 'component/Loading'
 class Add extends Component{
 
 	constructor(props){
@@ -11,72 +12,8 @@ class Add extends Component{
 		this.state={
 			banner:[],
 			currIndex: 0,
-			order:[
-				{
-					id:'1',
-					name:'吃饭皇帝大',
-					subList:[{
-							id:'101',
-							name:'孜然粉（01.30.0205）',
-							model:'2.5KG/袋*4袋/箱',
-							price: '567.40/箱',
-							expired:'1年',
-							number: 0,
-							money: 567.40
-						},
-						{
-							id:'102',
-							name:'孜然粉2（01.30.0205）',
-							model:'2.5KG/袋*4袋/箱',
-							price: '567.40/箱',
-							expired:'1年',
-							number: 0,
-							money: 567.40
-						},
-						{
-							id:'103',
-							name:'孜然粉3（01.30.0205）',
-							model:'2.5KG/袋*4袋/箱',
-							price: '567.40/箱',
-							expired:'1年',
-							number: 0,
-							money: 567.40
-						}
-					]
-				},
-				{
-					id:'2',
-					name:'铁板烧',
-					subList:[{
-							id:'201',
-							name:'孜然粉（01.30.0205）',
-							model:'2.5KG/袋*4袋/箱',
-							price: '567.40/箱',
-							expired:'1年',
-							number: 0,
-							money: 567.40
-						},
-						{
-							id:'202',
-							name:'孜然粉2（01.30.0205）',
-							model:'2.5KG/袋*4袋/箱',
-							price: '567.40/箱',
-							expired:'1年',
-							number: 0,
-							money: 567.40
-						},
-						{
-							id:'203',
-							name:'孜然粉3（01.30.0205）',
-							model:'2.5KG/袋*4袋/箱',
-							price: '567.40/箱',
-							expired:'1年',
-							number: 0,
-							money: 567.40
-						}
-					]
-				}
-			]
+			rightList:[],
+			showData: false
 		}
 	}
 
@@ -88,11 +25,23 @@ class Add extends Component{
 		}]
 	}
 
+	componentDidMount(){
+		this.props.dispatch(actions.getAllBrands());
+	}
+
+	componentWillUpdate(props){
+		if(this.props.leftData.length == 0 && props.leftData != 0){
+			this.switchLeft(0,props.leftData[0].brandsId,props.leftData[0].type);
+		}else if(this.props.leftData.length != 0 && !this.state.showData){
+			this.switchLeft(0,props.leftData[0].brandsId,props.leftData[0].type);
+		}
+	}
+
 	/*提交订单*/
 	handleSubmit(){
-		let order = this.state.order[this.state.currIndex];
+		let order = this.state.rightList[this.state.key];
 		let price = 0;
-		order.subList.map((item,index)=>{
+		order.map((item,index)=>{
 			price+=item.money*item.number;
 		});
 		
@@ -101,29 +50,65 @@ class Add extends Component{
 			pathname:'/order/submit',
 			state:{
 				price: price,
-				order: order
+				order: order,
+				name: this.props.leftData[this.state.currIndex].name
 			}
 		});
 	}
 
-	switchLeft(index){
-		this.setState({
-			currIndex: index
-		});
+	switchLeft(index,id,type){
+		let key = id+type;
+		
+		if(this.state.rightList[key]){
+			this.setState({
+					currIndex: index,
+					key: key,
+					showData: true
+				});
+		}else{
+			tools.fetch({
+				url:`/protal/mobile/${id}/${type}`,
+				method:'get'
+			}).then(response=>{
+				let rightList = [];
+				 response.brandMateriels.map((item,index)=>{
+				 	rightList.push({
+				 		name: item.name,
+				 		model: item.specification,
+				 		price: item.price+item.unit,
+				 		money: item.price,
+				 		expired: item.expirationDate+"月",
+				 		number:0,
+				 		id: item.id,
+				 		type: type
+				 	});
+				 })
+
+				this.state.rightList[key] =rightList;
+				this.setState({
+					currIndex: index,
+					key: key,
+					showData: true
+				});
+			});
+		}
 	}
 
 	render(){
 		let leftList = [];
 		let rightList = [];
-		this.state.order.map((item,index)=>{
-			leftList.push(<li key={index} className={`${this.state.currIndex == index ? 'active' : ''} item`} onClick={this.switchLeft.bind(this,index)}>{item.name}</li>);
+		if(!this.state.showData){
+			return <Loading/>;
+		}
+		this.props.leftData.map((item,index)=>{
+			leftList.push(<li key={index} className={`${this.state.currIndex == index ? 'active' : ''} item`}
+				onClick={this.switchLeft.bind(this,index,item.brandsId,item.type)}>{item.name}</li>);
+		});
 
-			if(this.state.currIndex == index){
-				item.subList.map((item,index)=>{
-					rightList.push(<GoodsItem key={index} order={item}/>);
-				})
-			}
-		})
+		this.state.rightList[this.state.key].map((item,index)=>{
+			rightList.push(<GoodsItem order={item} key={index}/>);
+		});
+
 		return (
 			<div style={{height:'100%'}}>
 				<div className='order-add-wrapper'>
@@ -145,4 +130,27 @@ class Add extends Component{
 	}
 }
 
-export default connect()(Add);
+function selector(state){
+	if(state.allBrands.data.brands.length != 0){
+		let leftData =[];
+		state.allBrands.data.brands.map((item,index)=>{
+			leftData.push({
+				name: item.name+"酱料订单",
+				type: 'sauce',
+				brandsId: item.id
+			});
+			leftData.push({
+				name: item.name+"酱料订单",
+				type: 'article',
+				brandsId: item.id
+			});
+		});
+		return {leftData:leftData}
+	}else{
+		return {
+			leftData:[]
+		}
+	}
+}
+
+export default connect(selector)(Add);

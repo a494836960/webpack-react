@@ -53,7 +53,7 @@ class Login extends Component{
 				password: this.state.password
 			}
 		}).then((json)=>{
-			if(json.code != 'C1001'){
+			if(json.code == 'C1001'){
 				let from =this.props.location.query.from;
 				if(!from){
 					from='home'

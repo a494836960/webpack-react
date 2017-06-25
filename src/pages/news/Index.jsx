@@ -2,102 +2,69 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from 'action/Index';
 import Banner from 'component/Banner';
-import NewsItem from 'component/NewsItem'
+import NewsItem from 'component/NewsItem';
+import PullLoadMore from 'component/pullLoadMore';
 
 class Index extends Component{
 
 	constructor(props){
 		super(props);
 		this.state={
-			banner : [],
-			newsList: [{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			},{
-				id:'1',
-				title: '中国人民共和国成立',
-				summary:'毛主席宣布中国人民共和国成立啦',
-				date: '10月1日',
-				pic: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=695501802,258418055&fm=26&gp=0.jpg'
-			}]
+			banner : []
 		}
 	}
 
 	componentWillMount(){
 		this.props.dispatch(actions.setHead({title: '资讯动态'}));
+		this.props.dispatch(actions.getNews());
+		this.props.dispatch(actions.getNewsAd());
+
+		this.state.interval = setInterval(()=>{
+			this.setState({}); 
+		},2000);
 	}
 
-	componentDidMount(){
-		let banner = [{
-			banner: require('img/index/banner.png'),
-			url: null
-		},{
-			banner: require('img/index/banner.png'),
-			url: null
-		},{
-			banner: require('img/index/banner.png'),
-			url: null
-		}];
+	componentWillUnmount(){
+		clearInterval(this.state.interval);
+	}
 
-		this.setState({
-			banner: banner
-		})
+	componentWillReceiveProps(props){
+		if(this.props.news.length != props.news.length){
+			this.setState({});
+		}
 	}
 
 	render(){
 		let newsHtml = []
-		this.state.newsList.map((item,index)=>{
+		this.props.news.map((item,index)=>{
 			newsHtml.push(<NewsItem key={index} item={item}/>)
 		})
-
+		 
+		let config = {
+			data: newsHtml,
+			id:'wrapList',
+			loadMore:()=>{
+				this.props.dispatch(actions.getNews(1));
+			}
+		}
+		
 		return (
-			<div>
-				<Banner list={this.state.banner}/>
-				<div className='news-list'>
-					{newsHtml}
+			<div style={{height:'100%'}}>
+				<Banner list={this.props.banner}/>
+				<div className='news-list' style={{height:'100%'}}>
+					<PullLoadMore config={config}/>
 				</div>
 			</div>
 		);
 	}
 }
 
-export default connect()(Index)
+function selector(state){
+	console.log(state)
+	return {
+		news: state.news.list,
+		banner: state.newsAd.list
+	}
+}
+
+export default connect(selector)(Index)

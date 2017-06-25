@@ -213,7 +213,8 @@ body {
   border-top: 1px solid #D6D7DC; }
 
 .article-head {
-  border-bottom: 1px dashed #D6D7DC; }
+  border-bottom: 1px dashed #D6D7DC;
+  padding-bottom: .25rem; }
 
 /*文章详情*/
 .article-title {
@@ -296,15 +297,18 @@ body {
   padding-left: 0.7rem;
   font-size: .3rem;
   color: #323232; }
-  .menu .menu-item.active {
+  .menu .menu-item.active, .menu .menu-item:active {
     background: #FAFAFA; }
+    .menu .menu-item.active i, .menu .menu-item:active i {
+      color: #FF6700; }
   .menu .menu-item .menu-body {
     display: block;
     border-bottom: 1px solid #D6D7DC;
     background-size: .5rem;
     background-repeat: no-repeat;
-    padding-left: 1rem;
     background-position: left center; }
+    .menu .menu-item .menu-body i {
+      margin-right: 1rem; }
 
 .index-section {
   background: #fff;
@@ -674,7 +678,7 @@ html, body, #container, #container > div {
 
 /*招商加盟*/
 .join-head.head {
-  background: url(/resources/protal/mobile/images/4ccdb3fa.nav-bg.png) no-repeat;
+  background: url(/57/resources/protal/mobile/images/4ccdb3fa.nav-bg.png) no-repeat;
   background-size: cover; }
   .join-head.head .back {
     color: #fff; }
@@ -811,7 +815,7 @@ html, body, #container, #container > div {
     color: #555;
     margin-bottom: .1rem;
     font-weight: 700;
-    width: 2rem;
+    width: 2.3rem;
     text-align: right;
     display: inline-block; }
   .form .form-group {
@@ -940,6 +944,91 @@ input[type=radio]:checked {
   width: 0;
   height: 0;
   background-color: #F5F5F5; }
+
+.recruitItem {
+  padding: .34rem .24rem;
+  background-color: #fff;
+  -webkit-transition: background .3s linear;
+  transition: background .3s linear;
+  margin-top: .3rem; }
+  .recruitItem.recruitItem-expand {
+    background: #fafafa; }
+    .recruitItem.recruitItem-expand .recruitItem-symbol:before {
+      -webkit-transform: rotate(90deg) !important;
+              transform: rotate(90deg) !important; }
+    .recruitItem.recruitItem-expand .recruitItem-body {
+      display: block; }
+  .recruitItem .recruitItem-head {
+    color: #7d7d7d;
+    display: -webkit-box;
+    -webkit-box-align: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center; }
+  .recruitItem .recruitItem-left {
+    display: -webkit-box;
+    -webkit-box-align: start;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-box-flex: 1; }
+  .recruitItem .recruitItem-right {
+    display: -webkit-box; }
+  .recruitItem .recruitItem-name {
+    color: #323232;
+    font-weight: bold;
+    font-size: .3rem; }
+  .recruitItem .recruitItem-symbol {
+    display: inline-block;
+    width: .5rem;
+    height: .5rem;
+    border: 2px solid #e1e1e1;
+    border-radius: 50%;
+    position: relative; }
+    .recruitItem .recruitItem-symbol:before {
+      content: '';
+      position: absolute;
+      top: .1rem;
+      height: .3rem;
+      width: 2px;
+      background: #e1e1e1;
+      left: calc(50% - 1px);
+      -webkit-transition: -webkit-transform .3s linear;
+      transition: -webkit-transform .3s linear;
+      transition: transform .3s linear;
+      transition: transform .3s linear, -webkit-transform .3s linear; }
+    .recruitItem .recruitItem-symbol:after {
+      content: '';
+      position: absolute;
+      left: .1rem;
+      width: .3rem;
+      height: 2px;
+      background: #e1e1e1;
+      top: calc(50% - 1px); }
+  .recruitItem .recruitItem-body {
+    color: #555;
+    display: none; }
+    .recruitItem .recruitItem-body .recruitItem-labels {
+      padding-top: .2rem; }
+    .recruitItem .recruitItem-body .recruitItem-label {
+      border: 1px solid #e1e1e1;
+      padding: .1rem .15rem;
+      display: inline-block;
+      margin-right: .1rem;
+      margin-top: .1rem;
+      border-radius: 2px; }
+    .recruitItem .recruitItem-body .recruitItem-required {
+      border-bottom: 1px dashed #e1e1e1;
+      color: #323232; }
+      .recruitItem .recruitItem-body .recruitItem-required .recruitItem-required-title {
+        font-size: .26rem;
+        padding: .3rem 0 .24rem; }
+      .recruitItem .recruitItem-body .recruitItem-required .recruitItem-required-body {
+        line-height: .4rem; }
+        .recruitItem .recruitItem-body .recruitItem-required .recruitItem-required-body p {
+          margin-bottom: .15rem; }
+
+.tl {
+  text-align: left !important;
+  -webkit-box-pack: start !important; }
 @charset "UTF-8";
 .head {
   display: -webkit-box;
@@ -1115,7 +1204,12 @@ input[type=radio]:checked {
     font-size: 0.28rem; }
   .news-item .news-item-summary {
     color: #7D7D7D;
-    font-size: .24rem; }
+    font-size: .24rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-top: .1rem; }
   .news-item .news-item-date {
     color: #848484;
     font-size: .24rem;
@@ -1195,11 +1289,45 @@ input[type=radio]:checked {
           box-sizing: border-box; }
   .tips.tips-hidden {
     opacity: 0; }
+
+/* 加载中 */
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center; }
+  .loading img {
+    margin-top: 1.2rem;
+    -webkit-animation: rotate360 1s linear;
+            animation: rotate360 1s linear;
+    width: 1.5rem;
+    -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite; }
+
+@keyframes rotate360 {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+@-webkit-keyframes rotate360 /* Safari 和 Chrome */ {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
 @font-face {
   font-family: 'iconfont';
-  src: url(/resources/protal/mobile/images/a5532f5b.iconfont.eot);
-  src: url(/resources/protal/mobile/images/a5532f5b.iconfont.eot?#iefix) format("embedded-opentype"), url(/resources/protal/mobile/images/7101c3c8.iconfont.woff) format("woff"), url(/resources/protal/mobile/images/52f1c9f8.iconfont.ttf) format("truetype"), url(/resources/protal/mobile/images/3173d6d0.iconfont.svg#iconfont) format("svg"); }
+  /* project id 319636 */
+  src: url("//at.alicdn.com/t/font_myprm1o919qnnrk9.eot");
+  src: url("//at.alicdn.com/t/font_myprm1o919qnnrk9.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_myprm1o919qnnrk9.woff") format("woff"), url("//at.alicdn.com/t/font_myprm1o919qnnrk9.ttf") format("truetype"), url("//at.alicdn.com/t/font_myprm1o919qnnrk9.svg#iconfont") format("svg"); }
 
 .iconfont {
   font-family: iconfont;
-  font-size: .5rem; }
+  font-size: .5rem;
+  vertical-align: middle; }

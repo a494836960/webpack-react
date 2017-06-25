@@ -829,7 +829,7 @@ html,body,#container, #container>div{
     color: #555;
     margin-bottom: .1rem;
     font-weight: 700;
-    width: 2rem;
+    width: 2.3rem;
     text-align: right;
     display: inline-block;
   }
@@ -1080,7 +1080,10 @@ input[type=radio]:checked{
 
   }
 }
-
+.tl{
+  text-align: left !important;
+  -webkit-box-pack:start !important;
+}
 
 
 

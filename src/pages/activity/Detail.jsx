@@ -1,8 +1,7 @@
 import React,{Component} from 'react';
-import ArticleDetail from 'component/ArticleDetail';
 import tools from 'verdor/tools';
 import {connect} from 'react-redux';
-import * as actions from 'action/Index'
+import * as actions from 'action/Index';
 
 class Detail extends Component{
 	constructor(props){
@@ -13,7 +12,7 @@ class Detail extends Component{
 	}
 
 	componentWillMount(){
-		this.props.dispatch(actions.setHead({title:'活动详情'}));
+		this.props.dispatch(actions.setHead({title:"活动详情"}));
 	}
 
 	componentDidMount(){
@@ -22,19 +21,32 @@ class Detail extends Component{
 			method: 'GET'
 		}).then(response=>{
 			this.setState({
-				articleContent: response.article.content
+				articleContent: response.article.content,
+				title:  response.article.title,
+				date: response.article.createDate
 			})
 		});
 		
 	}
 
 	render(){
+
 		return (
 			<div className='article'>
-				<ArticleDetail articleContent={this.state.articleContent}/>
+				<header className='article-head'>
+					<h1 className='article-title'>{this.state.title}</h1>
+					<div className='article-intro'>
+						<span className='article-intro-date'>
+							时间：{tools.formatterDate(this.state.date)}
+						</span>
+					</div>
+				</header>
+				<div className='article-body' dangerouslySetInnerHTML={{__html: this.state.articleContent}}>
+					 
+				</div>
 			</div>
 		);
 	}
 }
 
-export default connect()(Detail)
+export default connect()(Detail);

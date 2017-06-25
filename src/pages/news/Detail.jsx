@@ -17,7 +17,7 @@ class Detail extends Component{
 
 	componentDidMount(){
 		tools.fetch({
-			url:'/protal/mobile/activeDetail?id='+this.props.params.id,
+			url:'/protal/mobile/articleDetail?id='+this.props.params.id,
 			method: 'GET'
 		}).then(response=>{
 			this.setState({

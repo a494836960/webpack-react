@@ -33,7 +33,7 @@ class GoodsItem extends Component {
 			<li className='order-sub-item'>
 				<div className='order-sub-left'>
 					<p className='order-sub-name'> {this.state.order.name}</p>
-					<p className='order-sub-model'>规格：{this.state.order.model}}</p>
+					<p className='order-sub-model'>规格：{this.state.order.model}</p>
 					<p className='order-sub-price'>&yen; {this.state.order.price}</p>
 				</div>
 				<div className='order-sub-right'>

@@ -12,9 +12,9 @@ module.exports = {
 	onEnter: (_, replaceState) => {
 		let user = tools.SS.getItem('user');
 		
-		//if(!(user.lastTime && new Date() - user.lastTiem <= 3600 * 24 * 1000 && !user.isLogin)){
-		//	replaceState('/user');
-		//}		
+		if(!(user.lastTime && new Date() - user.lastTiem <= 3600 * 24 * 1000 && !user.isLogin)){
+			replaceState('/user');
+		}		
 	},
 	getChildRoutes(location,cb){
 		require.ensure([],require=>{

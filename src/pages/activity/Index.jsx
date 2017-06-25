@@ -37,7 +37,7 @@ class Index extends Component{
 	}
 
 	goActive(id){
-		this.props.router.push(`/news/detail/${id}`);
+		this.props.router.push(`/activity/detail/${id}`);
 	}
 
 	render(){
